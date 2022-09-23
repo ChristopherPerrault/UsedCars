@@ -1,7 +1,10 @@
 <!-- Universal footer -->
 
-<footer class="footer">
-    <div>© 2022 REGEX GROUP</div>
+<footer class="footer fixed-bottom">
+    <div class="container text-center">
+        <div>© 2022 REGEX GROUP</div>
+    </div>
+
 </footer>
 <script src=""></script>
 </body>
