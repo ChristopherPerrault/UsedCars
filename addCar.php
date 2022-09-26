@@ -1,12 +1,13 @@
 <?php
-require_once('db.php');
+require_once('./config/db.php');
+
 //--------------------------------------
 // !important work in progress - Chris
 // -------------------------------------
 
 //  initializing message variables to blank
-$makeErr = $modelErr = $yrErr = $mileageErr = $colorErr = $carConditionErr = $askPriceErr = $imagesErr = "";
-$make = $model = $yr = $mileage = $color = $carCondition = $askPrice
+$makeErr = $modelErr = $yearErr = $mileageErr = $colorErr = $carConditionErr = $askPriceErr = $imagesErr = "";
+$make = $model = $year = $mileage = $color = $carCondition = $askPrice
     // = $images   might not be needed here 
     = "";
 
@@ -98,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    //! absolutely fix this, but remember it's an added feature
+    // absolutely fix this, but remember it's an added feature
     if (empty($_POST["images"])) {
         $imagesErr = "&nbsp You must include at least 1 image &nbsp";
     } else {
@@ -140,7 +141,7 @@ if ((isset($_POST['make'])) &&
     $images = $_POST["images"];
     // $datePosted = $_POST["date_posted"];
 
-    $addQuery = "INSERT INTO used_inventory(make, model, `year`, mileage, color, car_condition, asking_price, images) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "', '" . $images . "')";
+    $addQuery = "INSERT INTO 'cars'(make, model, `year`, mileage, color, car_condition, asking_price, images) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "', '" . $images . "')";
 
     $flag = mysqli_query($conn, $addQuery);
 
@@ -164,7 +165,7 @@ if ((isset($_POST['make'])) &&
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>UsedCars | Add Car</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -183,7 +184,7 @@ if ((isset($_POST['make'])) &&
 
             <!-- changed from spans to p's for some reason, fix -->
             <label for="year">Year: </label>
-            <input type="text" name="yr" placeholder="Ex: 1998" value="<?= (isset($year)) ? $year : ''; ?>"><br>
+            <input type="text" name="year" placeholder="Ex: 1998" value="<?= (isset($year)) ? $year : ''; ?>"><br>
             <p class="error"><?= $yearErr ?></p>
             <br>
 
@@ -205,7 +206,7 @@ if ((isset($_POST['make'])) &&
             <br>
 
             <label for="car_condition">Condition: </label>
-            //!-------------------------------------
+
             <!-- gotta change this to option boxes -->
             <input type="text" name="car_condition" value="<?= (isset($carCondition)) ? $carCondition : ''; ?>"><br>
             <p class="error"><?= $carConditionErr ?></p>
@@ -217,7 +218,7 @@ if ((isset($_POST['make'])) &&
             <p class="error"><?= $askPriceErr ?></p>
             <br>
 
-            //! also need fix here to accomodate uploads
+            <!-- also need fix here to accomodate uploads -->
             <label for="images">Upload Image(s): </label>
             <input type="text" name="images" value="<?= (isset($images)) ? $images : ''; ?>"><br>
             <p class="error"><?= $imagesErr ?></p>
@@ -225,7 +226,8 @@ if ((isset($_POST['make'])) &&
 
 
             <input type="submit" value="Confirm"><br>
-            <input type="reset" value="Reset Form">
+            <input type="reset" value=Reset Form>
+            <a href="index.php"><input type="submit" value="Back"></a>
 
         </form>
     </div>
