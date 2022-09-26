@@ -1,40 +1,52 @@
 <!-- Header -->
-<?php 
+<?php
 include('templates/header-logged-out.php');
-require('config/db.php'); 
 ?>
 
 <?php
-
+#initialize session data (first time)
 session_start();
 
-#if form submitted, insert values into the database.
+#check if form submitted
 if (isset($_POST['user_id'])) {
-    #removes backslashes
-    #escapes special characters in a string
+    #store form inputs in variables
+    #removes backslashes & escapes special characters in a string
     $user_id = stripslashes($_REQUEST['user_id']);
     $user_id = mysqli_real_escape_string($con, $user_id);
 
     $password = stripslashes($_REQUEST['password']);
     $password = mysqli_real_escape_string($con, $password);
 
-    #Checking if user exists in the database or not
+    #query -> check if user exists
     $query = "SELECT * FROM `users` WHERE user_id='$user_id' and password='" . md5($password) . "'";
 
-    #execute query & validate 
+    #execute query  
     $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
-    $rows = mysqli_num_rows($result);
-    if ($rows == 1) {
-        #if success - store user_id in $_SESSION variable
-        $_SESSION['user_id'] = $user_id;
-        #redirect user to index.php
-        header("Location: index.php");
+    #store user info
+    $row = mysqli_fetch_assoc($result);
+    $num_row = mysqli_num_rows($result);
+
+    #check if admin, user or failure
+    if ($num_row == 1){
+        if ($row['usertype'] == 'admin') {
+
+            #store user_id and redirect
+            $_SESSION['user_id'] = $user_id;
+            header("Location: admin.php");
+        } else if ($row['usertype'] == 'user') {
+    
+            #store user_id and redirect
+            $_SESSION['user_id'] = $user_id;
+            header("Location: index.php");
+        }
     } else {
         #if failure
-        echo "<div class='form'><h3>user_id/password is incorrect.</h3><br/>Click here to <a href='login.php'>Login</a></div>";
+        echo "<script type='text/javascript'>alert('user_id or password is incorrect!')</script>";
     }
+    
 }
+
 ?>
 
 <div class="form container text-center">
@@ -43,8 +55,10 @@ if (isset($_POST['user_id'])) {
     <br>
     <!-- FORM -->
     <form action="" method="post" name="login">
+        <!-- User Inputs -->
         <input type="number" name="user_id" placeholder="User ID" required />
         <input type="password" name="password" placeholder="Password" required />
+        
         <input name="submit" type="submit" value="Login" />
     </form>
     <br>

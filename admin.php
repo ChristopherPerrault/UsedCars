@@ -1,6 +1,6 @@
 <!-- Header -->
 <?php
-include('templates/header-logged-in.php');
+include ('templates/header-logged-in.php');
 ?>
 
 
@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
     #query -> check if user exists
     $query = "SELECT * FROM `users` WHERE user_id = '" . $user_id . "'";
 
-    #execute query
+    #execute query 
     $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
     #store user first name
@@ -30,10 +30,10 @@ if (isset($_SESSION['user_id'])) {
     <h1 class="text-center"> Welcome <?php echo $first_name ?>!</h1>
 
     <p class="text-center">
-        This is your home page -- You can chillout here
+        This is the administration home page -- You can chillout here
     </p>
 
-    <p class="text-center">Check out all these cool listings below</p>
+    <p class="text-center">You have special priviliges</p>
     <hr>
 </div>
 

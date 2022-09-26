@@ -1,16 +1,13 @@
 <!-- Header -->
 <?php 
 include('templates/header-logged-out.php');
-require('config/db.php'); 
 ?>
 
 <?php
-
-
-#if form submitted, insert values into database
+#check if form submitted
 if (isset($_REQUEST['user_id'])) {
-    #removes backslashes
-    #escapes special characters in a string
+    #store form inputs in variables
+    #removes backslashes & escapes special characters in a string
     $user_id = stripslashes($_REQUEST['user_id']);
     $user_id = mysqli_real_escape_string($con, $user_id);
 
@@ -30,10 +27,10 @@ if (isset($_REQUEST['user_id'])) {
     $password = mysqli_real_escape_string($con, $password);
 
 
-    #query
+    #query -> insert in database table
     $query = "INSERT into `users` (user_id, first_name, last_name, phone_number, email, password) VALUES ('" . $user_id . "', '" . $first_name . "', '" . $last_name . "', '" . $phone_number . "', '" . $email . "', '" . md5($password) . "')";
 
-    #execute query & validate 
+    #execute query 
     $result = mysqli_query($con, $query);
     if ($result) {
         #if success
@@ -47,6 +44,7 @@ if (isset($_REQUEST['user_id'])) {
     <br>
     <!-- Form -->
     <form name="registration" action="" method="post">
+        <!-- User Inputs -->
         <input type="number" name="user_id" placeholder="User ID" required /><br><br>
         <input type="text" name="first_name" placeholder="First Name" required /><br><br>
         <input type="text" name="last_name" placeholder="Last Name" required /><br><br>
