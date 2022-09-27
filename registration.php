@@ -8,7 +8,7 @@ $usernameErr = $fnameErr = $lnameErr = $phoneErr = $emailErr = $passwordErr = ""
 $username = $fname = $lname = $phone = $email = $password = "";
 
 $success = "";
-//  all inputs passed through test_input for security
+// ------------------ TEST INPUT FUNCTION ------------------
 function test_input($data)
 {
     $data = trim($data);
@@ -17,6 +17,7 @@ function test_input($data)
     return $data;
 }
 
+// ------------------ FORM VALIDATION ------------------
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if(empty($_POST['username'])) {
         $usernameErr = "Username is required.";
@@ -89,7 +90,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $passwordErr = "Password must be at least 8 chars and include at least one special character, one uppercase letter and one digit.";
         }
    }
-
+    
+// ------------------ SENDING TO DATABASE ------------------
    if(empty($usernameErr) &&
       empty($fnameErr) && 
       empty($lnameErr) && 
