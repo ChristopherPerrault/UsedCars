@@ -4,61 +4,86 @@ include('templates/header-logged-out.php');
 ?>
 
 <?php
-#initialize session data (first time)
 session_start();
 
-#check if form submitted
-if (isset($_POST['user_id'])) {
-    #store form inputs in variables
-    #removes backslashes & escapes special characters in a string
-    $user_id = stripslashes($_REQUEST['user_id']);
-    $user_id = mysqli_real_escape_string($con, $user_id);
+$error = "";
+$username = $password = "";
 
-    $password = stripslashes($_REQUEST['password']);
-    $password = mysqli_real_escape_string($con, $password);
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
-    #query -> check if user exists
-    $query = "SELECT * FROM `users` WHERE user_id='$user_id' and password='" . md5($password) . "'";
+// check if form submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $username = test_input($_POST['username']);
+    $password = test_input($_POST['password']);
 
-    #execute query  
-    $result = mysqli_query($con, $query) or die(mysqli_error($con));
+    $query = "SELECT * FROM `users` WHERE username='". $username ."' and password='". md5($password) . "'";
 
-    #store user info
-    $row = mysqli_fetch_assoc($result);
-    $num_row = mysqli_num_rows($result);
+    $result = mysqli_query($con, $query);
 
-    #check if admin, user or failure
+    $count = mysqli_num_rows($result);
+
+    if($count == 0) {
+        $error = "Username/Password invalid.";
+    }
+    if($count == 1) {
+        $row = mysqli_fetch_assoc($result);
+
+        if($row['usertype'] == "admin") {
+            
+            header("Location: index.php");
+        }
+    }
+   // ----------- STORE INFORMATION IN AN ARRAY -----------
+    
+    /*
     if ($num_row == 1){
-        if ($row['usertype'] == 'admin') {
 
-            #store user_id and redirect
+        if ($row['usertype'] == 'admin') {
+            
             $_SESSION['user_id'] = $user_id;
             header("Location: admin.php");
         } else if ($row['usertype'] == 'user') {
     
-            #store user_id and redirect
+            
             $_SESSION['user_id'] = $user_id;
             header("Location: index.php");
         }
     } else {
-        #if failure
-        echo "<script type='text/javascript'>alert('user_id or password is incorrect!')</script>";
+
+        $error = "Username/Password invalid.";
     }
+    */
     
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>UsedCars | Log In</title>
+</head>
 
 <div class="form container text-center">
     <h1>Used Cars Portal</h1>
     <h2>Log In</h2>
     <br>
     <!-- FORM -->
-    <form action="" method="post" name="login">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" name="login">
         <!-- User Inputs -->
-        <input type="number" name="user_id" placeholder="User ID" required />
+        <input type="text" name="username" placeholder="Username" required />
         <input type="password" name="password" placeholder="Password" required />
-        
+        <span class="error"><?php echo $error ?></span>
         <input name="submit" type="submit" value="Login" />
     </form>
     <br>
