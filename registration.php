@@ -166,4 +166,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Footer -->
 <?php include "templates/footer.php" ?>
-<?php include "templates/footer.php" ?>
