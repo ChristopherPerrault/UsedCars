@@ -1,16 +1,20 @@
 <?php
 require_once('./config/db.php');
+
 // include('./config/uploadImage.php');
+// include('./config/auth.php');
+include('./templates/header-logged-in.php');
+include('./templates/footer.php');
 
 //--------------------------------------
 // !important - work in progress - Chris
 // -------------------------------------
 
-//  initializing message variables to blank
+//  initializing error message variables and form entries to empty strings
 $makeErr = $modelErr = $yearErr = $mileageErr = $colorErr = $carConditionErr = $askPriceErr = $imagesErr = "";
 $make = $model = $year = $mileage = $color = $carCondition = $askPrice = $images = "";
 
-//  all inputs passed through test_input for security
+//  all inputs passed through test_input() for security
 function test_input($data)
 {
     $data = trim($data);
@@ -77,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $colorErr = "&nbsp Only letters and spaces allowed &nbsp";
         }
     }
-    //  just in case check, but not necessary as this is a select/optgroup
+    //  just-in-case check, but not necessary as this is a select/optgroup
     if (!empty($_POST["car_condition"])) {
         $carCondition = test_input($_POST["car_condition"]);
     }
@@ -94,17 +98,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
-    // absolutely fix this, but remember it's an added feature
-    // if (empty($_POST["images"])) {
-    //     $imagesErr = "&nbsp You must include at least 1 image &nbsp";
-    // } else {
-    //     $imagesErr = "";
-    //     $images = test_input($_POST["images"]);
-    //     if (!preg_match("/^[a-zA-Z]*$/", $images)) {
-    //         $imagesErr = "&nbsp Only letters and white space allowed &nbsp";
-    //     }
-    // }
-
 
     //  ------ Adding a new Car to the db ------
 
@@ -115,16 +108,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         empty($mileageErr) &&
         empty($colorErr) &&
         empty($$askPriceErr)
-        // &&
-        // isset($_POST['images'])
-
     ) {
 
         //  ------ Form input into variables for entry into db ------
         $make = $_POST["make"];
         $model = $_POST["model"];
         $year = $_POST["year"];
-        //  if miles selected, converts miles to km and rounds up to nearest whole int
+        //  if toggled to miles, converts miles to km and rounds up to nearest whole integer
         if (isset($_POST["mileageSelect"])) {
             $mileage = ceil($_POST["mileage"] * 1.60934);
         } else {
@@ -133,8 +123,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $color = $_POST["color"];
         $carCondition = $_POST["car_condition"];
         $askPrice = $_POST["asking_price"];
+        //  matches mySQL date format, adds the current actual date
         $datePosted = date("Y.m.d");
-        // $images = $_POST["images"];
 
         $addQuery = "INSERT INTO `cars`(make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
 
@@ -146,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Cannot add record" . mysqli_error($con));
         }
     } else {
-        //! needs to be removed/fixed so it doesn't show
+        //! needs to be fixed so it doesn't show as it does in top right corner
         echo '<span class="error">Form Incomplete</span>';
     }
 }
@@ -175,18 +165,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             <label for="model">Car Model: </label>
-            <input type="text" name="model" placeholder="Ex: Accord" value="<?= (isset($model)) ? $model : ''; ?>"><br><span class="error"><?= $modelErr ?></span>
+            <input type="text" name="model" placeholder="Ex: Accord"
+                value="<?= (isset($model)) ? $model : ''; ?>"><br><span class="error"><?= $modelErr ?></span>
 
 
-            <!-- changed from spans to p's for some reason, fix -->
             <label for="year">Year: </label>
             <input type="text" name="year" placeholder="Ex: 1998" value="<?= (isset($year)) ? $year : ''; ?>"><br>
             <span class="error"><?= $yearErr ?></span>
 
 
             <label for="mileage">Mileage: </label>
-            <input type="text" name="mileage" placeholder="Ex: 210000" value="<?= (isset($mileage)) ? $mileage : ''; ?>">
+            <input type="text" name="mileage" placeholder="Ex: 210000"
+                value="<?= (isset($mileage)) ? $mileage : ''; ?>">
 
+            <!-- Mileage selector toggle: km/mi, km by default -->
             <label class="switch">
                 <input type="checkbox" name="mileageSelect">
                 <span class="slider round"></span>
@@ -206,6 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="Like New">Like New</option>
                     <option value="Very Good">Very Good</option>
                     <option value="Good">Good</option>
+                    <option value="Fair">Fair</option>
                     <option value="Poor">Poor</option>
                     <option value="Very Poor">Very Poor</option>
                 </optgroup>
@@ -214,7 +207,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br>
 
             <label for="asking_price">Asking Price: </label>
-            <input type="text" name="asking_price" placeholder="Ex: 2400" value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
+            <input type="text" name="asking_price" placeholder="Ex: 2400"
+                value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
             <span class="error"><?= $askPriceErr ?></span>
 
 
@@ -223,10 +217,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="submit" name="submitImage" value="Upload" formaction="./config/uploadImage.php"> -->
 
             <br>
-            <!-- bottom buttons -->
-            <input type="submit" value="Confirm"><br>
-            <input type="reset" value="Reset Form">
-            <a href="index.php"><input type="submit" value="Go Back"></a>
+            <!-- bottom-of-form buttons -->
+            <input type="submit" value="Confirm" class="bottom-btn confirm"><br>
+            <input type="reset" value="Reset Form" class="bottom-btn reset">
+
+            <a href="userDash.php"><input type="submit" value="Go Back" class="bottom-btn back"></a>
 
         </form>
     </div>
