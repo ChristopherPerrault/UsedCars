@@ -8,6 +8,7 @@ $usernameErr = $fnameErr = $lnameErr = $phoneErr = $emailErr = $passwordErr = ""
 $username = $fname = $lname = $phone = $email = $password = "";
 
 $success = "";
+
 // ------------------ TEST INPUT FUNCTION ------------------
 function test_input($data)
 {
@@ -26,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = test_input($_POST['username']);
         $usernameErr = "";
 
-        if(!preg_match("/^[a-zA-Z0-9]{5,}$/", $username)) {
+        if(!preg_match("/^[a-zA-Z0-9]{5,20}$/", $username)) {
             $usernameErr = "Must be a minimum of 5 characters with only numbers and letters.";
         }
    }
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fnameErr = "";
         $fname = test_input($_POST['fname']);
 
-        if(!preg_match("/^[A-Z]{3,}$/", $fname)) {
+        if(!preg_match("/^[A-Z]{3,50}$/", $fname)) {
             $fnameErr = "Only Captial letters and white spaces allowed.";
         }
    }
@@ -50,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lnameErr = "";
         $lname = test_input($_POST['lname']);
 
-        if(!preg_match("/^[A-Z]{3,}$/", $lname)) {
-            $lnameErr = "Only Captial letters and white spaces allowed.";
+        if(!preg_match("/^[A-Z -]{3,50}$/", $lname)) {
+            $lnameErr = "Only Captial letters, white spaces and dashes allowed.";
         }
    }
 
@@ -86,12 +87,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordErr = "";
         $password = test_input($_POST['password']);
 
-        if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/", $password)) {
+        if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,100}$/", $password)) {
             $passwordErr = "Password must be at least 8 chars and include at least one special character, one uppercase letter and one digit.";
         }
    }
-    
-// ------------------ SENDING TO DATABASE ------------------
+
+   // ------------------ SENDING TO DATABASE ------------------
    if(empty($usernameErr) &&
       empty($fnameErr) && 
       empty($lnameErr) && 
@@ -107,8 +108,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        
+        if($username == "admin") {
+            $usertype = "admin";
 
-        $query = "INSERT into `users` (username, first_name, last_name, phone_number, email, password) VALUES ('" . $username . "', '" . $fname . "', '" . $lname . "', '" . $phone . "', '" . $email . "', '" . md5($password) . "')";
+        } else {
+            $usertype = "user";
+
+        }
+
+        $query = "INSERT into `users` (username, first_name, last_name, phone_number, email, password, usertype) VALUES ('" . $username . "', '" . $fname . "', '" . $lname . "', '" . $phone . "', '" . $email . "', '" . md5($password) . "', '" . $usertype . "')";
 
         #execute query 
         $result = mysqli_query($con, $query);
