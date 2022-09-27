@@ -104,52 +104,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //         $imagesErr = "&nbsp Only letters and white space allowed &nbsp";
     //     }
     // }
+
+
+    //  ------ Adding a new Car to the db ------
+
+    if (
+        empty($makeErr) &&
+        empty($modelErr) &&
+        empty($yearErr) &&
+        empty($mileageErr) &&
+        empty($colorErr) &&
+        empty($$askPriceErr)
+        // &&
+        // isset($_POST['images'])
+
+    ) {
+
+        //  ------ Form input into variables for entry into db ------
+        $make = $_POST["make"];
+        $model = $_POST["model"];
+        $year = $_POST["year"];
+        //  if miles selected, converts miles to km and rounds up to nearest whole int
+        if (isset($_POST["mileageSelect"])) {
+            $mileage = ceil($_POST["mileage"] * 1.60934);
+        } else {
+            $mileage = $_POST["mileage"];
+        }
+        $color = $_POST["color"];
+        $carCondition = $_POST["car_condition"];
+        $askPrice = $_POST["asking_price"];
+        $datePosted = date("Y.m.d");
+        // $images = $_POST["images"];
+
+        $addQuery = "INSERT INTO `cars`(make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
+
+        $flag = mysqli_query($con, $addQuery);
+
+        if ($flag) {
+            echo '<span class="success">Car has been successfully added</span>';
+        } else {
+            die("Cannot add record" . mysqli_error($con));
+        }
+    } else {
+        //! needs to be removed/fixed so it doesn't show
+        echo '<span class="error">Form Incomplete</span>';
+    }
 }
 
-
-//  ------ Adding a new Car to the db ------
-
-if ((isset($_POST['make'])) &&
-    isset($_POST['model']) &&
-    isset($_POST['year']) &&
-    isset($_POST['mileage']) &&
-    isset($_POST['color']) &&
-    isset($_POST['car_condition']) &&
-    isset($_POST['asking_price'])
-    // &&
-    // isset($_POST['images'])
-
-) {
-
-    //  ------ Form input into variables for entry into db ------
-    $make = $_POST["make"];
-    $model = $_POST["model"];
-    $year = $_POST["year"];
-    //  if miles selected, converts miles to km and rounds up to nearest whole int
-    if (isset($_POST["mileageSelect"])) {
-        $mileage = ceil($_POST["mileage"] * 1.60934);
-    } else {
-        $mileage = $_POST["mileage"];
-    }
-    $color = $_POST["color"];
-    $carCondition = $_POST["car_condition"];
-    $askPrice = $_POST["asking_price"];
-    $datePosted = date("Y.m.d");
-    // $images = $_POST["images"];
-
-    $addQuery = "INSERT INTO `cars`(make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
-
-    $flag = mysqli_query($con, $addQuery);
-
-    if ($flag) {
-        echo '<span class="success">Car has been successfully added</span>';
-    } else {
-        die("Cannot add record" . mysqli_error($con));
-    }
-} else {
-    //! needs to be removed/fixed so it doesn't show
-    echo '<span class="error">Form Incomplete</span>';
-}
 
 ?>
 
@@ -174,8 +175,7 @@ if ((isset($_POST['make'])) &&
 
 
             <label for="model">Car Model: </label>
-            <input type="text" name="model" placeholder="Ex: Accord"
-                value="<?= (isset($model)) ? $model : ''; ?>"><br><span class="error"><?= $modelErr ?></span>
+            <input type="text" name="model" placeholder="Ex: Accord" value="<?= (isset($model)) ? $model : ''; ?>"><br><span class="error"><?= $modelErr ?></span>
 
 
             <!-- changed from spans to p's for some reason, fix -->
@@ -185,8 +185,7 @@ if ((isset($_POST['make'])) &&
 
 
             <label for="mileage">Mileage: </label>
-            <input type="text" name="mileage" placeholder="Ex: 210000"
-                value="<?= (isset($mileage)) ? $mileage : ''; ?>">
+            <input type="text" name="mileage" placeholder="Ex: 210000" value="<?= (isset($mileage)) ? $mileage : ''; ?>">
 
             <label class="switch">
                 <input type="checkbox" name="mileageSelect">
@@ -215,8 +214,7 @@ if ((isset($_POST['make'])) &&
             <br>
 
             <label for="asking_price">Asking Price: </label>
-            <input type="text" name="asking_price" placeholder="Ex: 2400"
-                value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
+            <input type="text" name="asking_price" placeholder="Ex: 2400" value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
             <span class="error"><?= $askPriceErr ?></span>
 
 
