@@ -3,7 +3,19 @@
   margin: 0 auto;
 }
 
-/* ---FORM ERRORS--- */
+/* ---FORM MESSAGES--- */
+.success {
+  color: black;
+  border: 1px solid white;
+  border-radius: 2px;
+  background-color: rgb(149, 224, 121);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.success:empty {
+  display: none;
+}
+
 .error {
   color: black;
   border: 1px solid white;

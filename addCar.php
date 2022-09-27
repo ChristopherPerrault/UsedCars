@@ -1,6 +1,6 @@
 <?php
 require_once('./config/db.php');
-include('./config/uploadImage.php');
+// include('./config/uploadImage.php');
 
 //--------------------------------------
 // !important - work in progress - Chris
@@ -8,9 +8,7 @@ include('./config/uploadImage.php');
 
 //  initializing message variables to blank
 $makeErr = $modelErr = $yearErr = $mileageErr = $colorErr = $carConditionErr = $askPriceErr = $imagesErr = "";
-$make = $model = $year = $mileage = $color = $carCondition = $askPrice
-    // = $images   might not be needed here 
-    = "";
+$make = $model = $year = $mileage = $color = $carCondition = $askPrice = $images = "";
 
 //  all inputs passed through test_input for security
 function test_input($data)
@@ -30,8 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $makeErr = "";
         $make = test_input($_POST["make"]);
-        if (!preg_match("/^[a-zA-Z]*$/", $make)) {
-            $makeErr = "&nbsp Only letters and white space allowed &nbsp";
+        //  regex: letters, dashes and spaces allowed, not numbers
+        if (!preg_match("/^[a-zA-Z -]*$/", $make)) {
+            $makeErr = "&nbsp Only letters, dashes and spaces allowed &nbsp";
         }
     }
 
@@ -40,8 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $modelErr = "";
         $model = test_input($_POST["model"]);
-        if (!preg_match("/^[a-zA-Z]*$/", $model)) {
-            $modelErr = "&nbsp Only letters and white space allowed &nbsp";
+        //  regex: alphanumeric, plus sign, spaces and dashes accepted 
+        if (!preg_match("/^[a-zA-Z0-9 +-]*$/", $model)) {
+            $modelErr = "&nbsp Only letters, numbers, spaces, '+', '-' allowed &nbsp";
         }
     }
 
@@ -73,27 +73,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $colorErr = "";
         $color = test_input($_POST["color"]);
-        if (!preg_match("/^[a-zA-Z]*$/", $color)) {
-            $colorErr = "&nbsp Only letters and white space allowed &nbsp";
+        if (!preg_match("/^[a-zA-Z ]*$/", $color)) {
+            $colorErr = "&nbsp Only letters and spaces allowed &nbsp";
         }
+    }
+    //  just in case check, but not necessary as this is a select/optgroup
+    if (!empty($_POST["car_condition"])) {
+        $carCondition = test_input($_POST["car_condition"]);
     }
 
-    if (empty($_POST["car_condition"])) {
-        $carConditionErr = "&nbsp Condition is required &nbsp";
-    } else {
-        $carConditionErr = "";
-        $carCondition = test_input($_POST["car_condition"]);
-        if (!preg_match("/^[a-zA-Z]*$/", $carCondition)) {
-            $carConditionErr = "&nbsp Select a condition &nbsp";
-        }
-    }
 
     if (empty($_POST["asking_price"])) {
         $askPriceErr = "&nbsp Asking price is required &nbsp";
     } else {
         $askPriceErr = "";
         $askPrice = test_input($_POST["asking_price"]);
-        // regex: only positive ints up to 7 didgits long, no decimals. HTML input also has constraints
+        // regex: only positive ints up to 7 digits long, no decimals. HTML input also has min/max constraints
         if (!preg_match("/^[0-9]{1,7}$/", $askPrice)) {
             $askPriceErr = "&nbsp Only digits allowed &nbsp";
         }
@@ -112,48 +107,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 
-//? -----ADD RECORDS-----
+//  ------ Adding a new Car to the db ------
 
 if ((isset($_POST['make'])) &&
     isset($_POST['model']) &&
-    isset($_POST['yr']) &&
+    isset($_POST['year']) &&
     isset($_POST['mileage']) &&
-    isset($_POST['mileageSelect']) &&
     isset($_POST['color']) &&
     isset($_POST['car_condition']) &&
     isset($_POST['asking_price'])
-    &&
-    // isset($_POST['date_posted']) &&
-    isset($_POST['images'])
+    // &&
+    // isset($_POST['images'])
 
 ) {
 
-    //  ------ Form input for entry into db ------
+    //  ------ Form input into variables for entry into db ------
     $make = $_POST["make"];
     $model = $_POST["model"];
     $year = $_POST["year"];
     //  if miles selected, converts miles to km and rounds up to nearest whole int
-    if ($_POST["mileageSelect"]) {
+    if (isset($_POST["mileageSelect"])) {
         $mileage = ceil($_POST["mileage"] * 1.60934);
-    };
+    } else {
+        $mileage = $_POST["mileage"];
+    }
     $color = $_POST["color"];
     $carCondition = $_POST["car_condition"];
     $askPrice = $_POST["asking_price"];
-    $images = $_POST["images"];
-    // $datePosted = $_POST["date_posted"];
+    $datePosted = date("Y.m.d");
+    // $images = $_POST["images"];
 
-    $addQuery = "INSERT INTO 'cars'(make, model, `year`, mileage, color, car_condition, asking_price, images) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "', '" . $images . "')";
+    $addQuery = "INSERT INTO `cars`(make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
 
     $flag = mysqli_query($con, $addQuery);
 
     if ($flag) {
-        echo "Car added";
+        echo '<span class="success">Car has been successfully added</span>';
     } else {
         die("Cannot add record" . mysqli_error($con));
     }
 } else {
     //! needs to be removed/fixed so it doesn't show
-    echo "Form incomplete";
+    echo '<span class="error">Form Incomplete</span>';
 }
 
 ?>
@@ -176,18 +171,18 @@ if ((isset($_POST['make'])) &&
             <label for="make">Car Make: </label>
             <input type="text" name="make" placeholder="Ex: Honda" value="<?= (isset($make)) ? $make : ''; ?>"><br>
             <span class="error"><?= $makeErr ?></span>
-            <br>
+
 
             <label for="model">Car Model: </label>
             <input type="text" name="model" placeholder="Ex: Accord"
                 value="<?= (isset($model)) ? $model : ''; ?>"><br><span class="error"><?= $modelErr ?></span>
-            <br>
+
 
             <!-- changed from spans to p's for some reason, fix -->
             <label for="year">Year: </label>
             <input type="text" name="year" placeholder="Ex: 1998" value="<?= (isset($year)) ? $year : ''; ?>"><br>
             <span class="error"><?= $yearErr ?></span>
-            <br>
+
 
             <label for="mileage">Mileage: </label>
             <input type="text" name="mileage" placeholder="Ex: 210000"
@@ -199,16 +194,15 @@ if ((isset($_POST['make'])) &&
             </label>
 
             <br><span class="error"><?= $mileageErr ?></span>
-            <br>
+
 
             <label for="color">Color: </label>
             <input type="text" name="color" placeholder="Ex: Blue" value="<?= (isset($color)) ? $color : ''; ?>"><br>
             <span class="error"><?= $colorErr ?></span>
-            <br>
+
 
             <label for="car_condition">Condition:</label>
             <select name="car_condition" value="<?= (isset($carCondition)) ? $carCondition : ''; ?>">
-                <!-- broken -->
                 <optgroup label="--Select Condition--">
                     <option value="Like New">Like New</option>
                     <option value="Very Good">Very Good</option>
@@ -224,17 +218,17 @@ if ((isset($_POST['make'])) &&
             <input type="text" name="asking_price" placeholder="Ex: 2400"
                 value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
             <span class="error"><?= $askPriceErr ?></span>
-            <br>
 
-            <label>Select Image File:</label>
+
+            <!-- <label>Select Image File:</label>
             <input type="file" name="image">
-            <input type="submit" name="submitImage" value="Upload" formaction="./config/uploadImage.php">
+            <input type="submit" name="submitImage" value="Upload" formaction="./config/uploadImage.php"> -->
 
             <br>
             <!-- bottom buttons -->
             <input type="submit" value="Confirm"><br>
-            <input type="reset" value=Reset Form>
-            <a href="index.php"><input type="submit" value="Back"></a>
+            <input type="reset" value="Reset Form">
+            <a href="index.php"><input type="submit" value="Go Back"></a>
 
         </form>
     </div>
