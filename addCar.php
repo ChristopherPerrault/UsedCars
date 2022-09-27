@@ -116,12 +116,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //  make, model, color are all converted to lowercase then thier first chars are capitalized, even if words are separated by space(s), new lines, tabs, dashes, return carriages or apostrophes (delimiters provided in arguments of ucwords()). Numbers unaffected/stay intact.
 
         $make = $_POST["make"];
-        $make = strtolower($make);
-        $make = ucwords($make, " \t\r\n\f\v'-");
+        $make = ucwords(strtolower($make), " \t\r\n'-");
 
         $model = $_POST["model"];
-        $model = strtolower($model);
-        $model = ucwords($model, " \t\r\n\f\v'-");
+        $model = ucwords(strtolower($model), " \t\r\n'-");
 
         $year = $_POST["year"];
 
@@ -133,8 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $color = $_POST["color"];
-        $color = strtolower($color);
-        $color = ucwords($color, " \t\r\n\f\v'-");
+        $color = ucwords(strtolower($color), " \t\r\n'-");
 
         $carCondition = $_POST["car_condition"];
 
