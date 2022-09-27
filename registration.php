@@ -87,8 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordErr = "";
         $password = test_input($_POST['password']);
 
-        if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,100}$/", $password)) {
-            $passwordErr = "Password must be at least 8 chars and include at least one special character, one uppercase letter and one digit.";
+        if(!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/", $password)) {
+            $passwordErr = "Password must be between 8 & 20 characters with at least one special character, one uppercase letter and one digit.";
         }
    }
 
