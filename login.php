@@ -2,7 +2,6 @@
 <?php
 include('templates/header-logged-out.php');
 ?>
-
 <?php
 session_start();
 
@@ -35,33 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ((isset($_POST['submit'])) && $count > 0) {
         $row = mysqli_fetch_assoc($result);
 
-        //! broken for now: if you replace this header location with a working page, it works, for either usertype (tested with both kinds of users) Problem may be with session or the admin page itself, unsure
         if ($row['usertype'] == "admin") {
+            //! define the $_SESSION['user_id']
+            $_SESSION['user_id'] = $row['user_id'];
             header("Location: admin.php");
+
         } else if ($row['usertype'] == "user") {
-            header('Location: registration.php');
+            //! define the $_SESSION['user_id']
+            $_SESSION['user_id'] = $row['user_id'];
+            header('Location: index.php');
         }
     }
-    // ----------- STORE INFORMATION IN AN ARRAY -----------
-
-    /*
-    if ($num_row == 1){
-
-        if ($row['usertype'] == 'admin') {
-            
-            $_SESSION['user_id'] = $user_id;
-            header("Location: admin.php");
-        } else if ($row['usertype'] == 'user') {
     
-            
-            $_SESSION['user_id'] = $user_id;
-            header("Location: index.php");
-        }
-    } else {
-
-        $error = "Username/Password invalid.";
-    }
-    */
 }
 
 ?>
@@ -92,4 +76,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <!-- Footer -->
+
 <?php include "templates/footer.php" ?>
