@@ -3,8 +3,8 @@ require_once('./config/db.php');
 
 // include('./config/uploadImage.php');
 // include('./config/auth.php');
-include('./templates/header-logged-in.php');
-include('./templates/footer.php');
+// include('./templates/header-logged-in.php');
+
 
 //--------------------------------------
 // !important - work in progress - Chris
@@ -20,6 +20,7 @@ function test_input($data)
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
+
     return $data;
 }
 
@@ -111,17 +112,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ) {
 
         //  ------ Form input into variables for entry into db ------
+
+        //  make, model, color are all converted to lowercase then thier first chars are capitalized, even if words are separated by space(s), new lines, tabs, dashes, return carriages or apostrophes (delimiters provided in arguments of ucwords()). Numbers unaffected/stay intact.
+
         $make = $_POST["make"];
+        $make = strtolower($make);
+        $make = ucwords($make, " \t\r\n\f\v'-");
+
         $model = $_POST["model"];
+        $model = strtolower($model);
+        $model = ucwords($model, " \t\r\n\f\v'-");
+
         $year = $_POST["year"];
+
         //  if toggled to miles, converts miles to km and rounds up to nearest whole integer
         if (isset($_POST["mileageSelect"])) {
             $mileage = ceil($_POST["mileage"] * 1.60934);
         } else {
             $mileage = $_POST["mileage"];
         }
+
         $color = $_POST["color"];
+        $color = strtolower($color);
+        $color = ucwords($color, " \t\r\n\f\v'-");
+
         $carCondition = $_POST["car_condition"];
+
         $askPrice = $_POST["asking_price"];
         //  matches mySQL date format, adds the current actual date
         $datePosted = date("Y.m.d");
@@ -226,5 +242,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </body>
+<?php
+include('./templates/footer.php');
+?>
 
 </html>
