@@ -19,29 +19,31 @@ function test_input($data)
 
 // check if form submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $username = test_input($_POST['username']);
     $password = test_input($_POST['password']);
 
-    $query = "SELECT * FROM `users` WHERE username='". $username ."' and password='". md5($password) . "'";
+    $query = "SELECT * FROM `users` WHERE username='" . $username . "' and password='" . md5($password) . "';";
 
     $result = mysqli_query($con, $query);
 
     $count = mysqli_num_rows($result);
 
-    if($count == 0) {
+    if ((isset($_POST['submit'])) && $count == 0) {
         $error = "Username/Password invalid.";
     }
-    if($count == 1) {
+    if ((isset($_POST['submit'])) && $count > 0) {
         $row = mysqli_fetch_assoc($result);
 
-        if($row['usertype'] == "admin") {
-            
-            header("Location: index.php");
+        //! broken for now: if you replace this header location with a working page, it works, for either usertype (tested with both kinds of users) Problem may be with session or the admin page itself, unsure
+        if ($row['usertype'] == "admin") {
+            header("Location: admin.php");
+        } else if ($row['usertype'] == "user") {
+            header('Location: registration.php');
         }
     }
-   // ----------- STORE INFORMATION IN AN ARRAY -----------
-    
+    // ----------- STORE INFORMATION IN AN ARRAY -----------
+
     /*
     if ($num_row == 1){
 
@@ -60,7 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Username/Password invalid.";
     }
     */
-    
 }
 
 ?>
