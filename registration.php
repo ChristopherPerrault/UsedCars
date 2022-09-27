@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fnameErr = "";
         $fname = test_input($_POST['fname']);
 
-        if(!preg_match("/^[A-Z]{3,50}$/", $fname)) {
+        if(!preg_match("/^[a-zA-Z]{3,50}$/", $fname)) {
             $fnameErr = "Only Captial letters and white spaces allowed.";
         }
    }
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lnameErr = "";
         $lname = test_input($_POST['lname']);
 
-        if(!preg_match("/^[A-Z -]{3,50}$/", $lname)) {
+        if(!preg_match("/^[a-zA-Z -]{3,50}$/", $lname)) {
             $lnameErr = "Only Captial letters, white spaces and dashes allowed.";
         }
    }
@@ -102,9 +102,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $username = $_POST['username'];
         $fname = $_POST['fname'];
-        strtoupper($fname);
+        $fname = ucwords(strtolower($fname), " \t\r\n'-");
         $lname = $_POST['lname'];
-        strtoupper($lname);
+        $lname = ucwords(strtolower($lname), " \t\r\n'-");
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
 
-        $query = "INSERT into `users` (username, first_name, last_name, phone_number, email, password, usertype) VALUES ('" . $username . "', '" . $fname . "', '" . $lname . "', '" . $phone . "', '" . $email . "', '" . md5($password) . "', '" . $usertype . "')";
+        $query = "INSERT into `users` (username, first_name, last_name, phone_number, email, `password`, usertype) VALUES ('" . $username . "', '" . $fname . "', '" . $lname . "', '" . $phone . "', '" . $email . "', '" . md5($password) . "', '" . $usertype . "')";
 
         #execute query 
         $result = mysqli_query($con, $query);
@@ -165,4 +165,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 
 <!-- Footer -->
+<?php include "templates/footer.php" ?>
 <?php include "templates/footer.php" ?>
