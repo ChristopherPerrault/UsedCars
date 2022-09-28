@@ -1,5 +1,7 @@
 <!-- Header -->
 <?php
+require('config/db.php');
+require('config/auth.php');
 include ('templates/header-logged-in.php');
 ?>
 
