@@ -4,7 +4,7 @@ include('templates/header-logged-out.php');
 ?>
 
 <?php
-$usernameErr = $fnameErr = $lnameErr = $phoneErr = $emailErr = $passwordErr = $usernameExists = "";
+$usernameErr = $fnameErr = $lnameErr = $phoneErr = $emailErr = $passwordErr = "";
 $username = $fname = $lname = $phone = $email = $password = "";
 
 $success = "";
@@ -25,20 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $usernameQuery = mysqli_query($con, "SELECT * FROM `users` WHERE username = '" . $_POST['username'] . "'");
         if (mysqli_num_rows($usernameQuery)) {
-            $usernameExists = "This Username already exists.";
             // $usernameExists = "This Username already exists.";
+            $usernameErr = "This Username already exists.";
         } else {
-            $usernameExists = "";
-            // $usernameErr = "";
+            // $usernameExists = "";
+            $usernameErr = "";
+
+            $username = test_input($_POST['username']);
+
+            if (!preg_match("/^[a-zA-Z0-9]{5,20}$/", $username)) {
+                $usernameErr = "Must be a minimum of 5 characters with only numbers and letters.";
+            }
         }
-    }
-
-
-    $username = test_input($_POST['username']);
-    $usernameErr = "";
-
-    if (!preg_match("/^[a-zA-Z0-9]{5,20}$/", $username)) {
-        $usernameErr = "Must be a minimum of 5 characters with only numbers and letters.";
     }
 
 
@@ -156,7 +154,6 @@ one digit.";
         <!-- User Inputs -->
         <input type="text" name="username" placeholder="Username" /><br>
         <span class="error"><?php echo $usernameErr ?></span><br><br>
-        <span class="error"><?php echo $usernameExists ?></span><br><br>
         <input type="text" name="fname" placeholder="First Name" /><br>
         <span class="error"><?php echo $fnameErr ?></span><br><br>
         <input type="text" name="lname" placeholder="Last Name" /><br>
