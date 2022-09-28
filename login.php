@@ -13,7 +13,7 @@ function test_input($data)
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
-    return $data;
+    return $data; 
 }
 
 // check if form submitted
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else if ($row['usertype'] == "user") {
             //! define the $_SESSION['user_id']
             $_SESSION['user_id'] = $row['user_id'];
-            header('Location: index.php');
+            header('Location: userdashboard.php');
         }
     }
     

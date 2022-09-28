@@ -44,15 +44,8 @@ include('config/auth.php');
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                         <!-- Main Nav-Bar Items -->
-
                         <li class="nav-item">
-                            <a class="nav-link" href="#">View Listings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="addCar.php">Add a Car</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Manage Your Account</a>
+                            <a class="nav-link" href="#">My Account</a>
                         </li>
 
                         <?php
