@@ -1,9 +1,8 @@
 <?php
-require_once('./config/db.php');
-
+// require_once('./config/db.php');
 // include('./config/uploadImage.php');
 // include('./config/auth.php');
-// include('./templates/header-logged-in.php');
+include('./templates/header-logged-in.php');
 
 
 //--------------------------------------
@@ -138,8 +137,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $askPrice = $_POST["asking_price"];
         //  matches mySQL date format, adds the current actual date
         $datePosted = date("Y.m.d");
+        
+        $user_id = $_SESSION['user_id'];
 
-        $addQuery = "INSERT INTO `cars`(make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
+        $addQuery = "INSERT INTO `cars`(user_id, make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $user_id . "', '" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
 
         $flag = mysqli_query($con, $addQuery);
 

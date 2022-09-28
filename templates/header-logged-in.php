@@ -49,7 +49,7 @@ include('config/auth.php');
                             <a class="nav-link" href="#">View Listings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Add a Car</a>
+                            <a class="nav-link" href="addCar.php">Add a Car</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Manage Your Account</a>
