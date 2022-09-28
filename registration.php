@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = test_input($_POST['username']);
             //  regex: alphanumerics allowed, min/max set from 2 to db constraint
             if (!preg_match("/^[a-zA-Z0-9]{5,20}$/", $username)) {
-                $usernameErr = "&nbsp Only letters & numbers, minimum 2 characters, maxiumum 20 allowed. &nbsp";
+                $usernameErr = "&nbsp Only letters & numbers, minimum 5 characters, maxiumum 20 allowed. &nbsp";
             }
         }
     }
