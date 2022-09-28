@@ -234,7 +234,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="submit" value="Confirm" class="bottom-btn confirm"><br>
             <input type="reset" value="Reset Form" class="bottom-btn reset">
 
-            <a href="userdashboard.php"><input type="submit" value="Go Back" class="bottom-btn back"></a>
+            <a href="userdashboard.php"><input type="button" value="Go Back" class="bottom-btn back"></a>
 
         </form>
     </div>
