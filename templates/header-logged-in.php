@@ -1,8 +1,3 @@
-<?php
-require('config/db.php');
-include('config/auth.php');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 

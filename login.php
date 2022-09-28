@@ -1,5 +1,6 @@
 <!-- Header -->
 <?php
+require('config/db.php');
 include('templates/header-logged-out.php');
 ?>
 <?php
