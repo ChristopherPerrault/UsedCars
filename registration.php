@@ -8,7 +8,7 @@ include('templates/header-logged-out.php');
 $usernameErr = $fnameErr = $lnameErr = $phoneErr = $emailErr = $passwordErr = "";
 $username = $fname = $lname = $phone = $email = $password = "";
 
-$success = "";
+$message = "";
 
 // ------------------ TEST INPUT FUNCTION ------------------
 function test_input($data)
@@ -134,10 +134,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usertype . "')";
 
         $result = mysqli_query($con, $query);
-        if ($result) {
-            $success = "You have registered successfully! <a href='login.php'> Log In here!</a>";
-        }
-        //! should take an else for unsuccessful reg
+
+        $success = "You have registered successfully! <a href='login.php'> Log In here!</a>";
+        $fail = "Unsuccessful registration, try again. If issue persists, contact the Admin.";
+
+        $message = $result ? $success : $fail;
     }
 }
 
@@ -166,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br>
         <label for="fname">First Name: </label>
         <input type="text" name="fname" placeholder="Ex: John" value="<?= (isset($fname)) ? $fname : ''; ?>" />
-        <!-- <span class="error"></span> -->
+        <span class="error"><?php echo $fnameErr ?></span>
         <br>
         <label for="lname">Last Name: </label>
         <input type="text" name="lname" placeholder="Ex: Kimble" value="<?= (isset($lname)) ? $lname : ''; ?>" />
@@ -187,7 +188,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br>
         <input type="submit" name="submit" value="Register" />
     </form>
-    <p><?php echo $success ?></p>
+    <p><?php echo $message ?></p>
 
 </div>
 
