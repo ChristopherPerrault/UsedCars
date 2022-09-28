@@ -21,78 +21,76 @@ function test_input($data)
 // ------------------ FORM VALIDATION ------------------
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST['username'])) {
-        $usernameErr = "Username is required.";
+        $usernameErr = "&nbsp Username is required. &nbsp";
+        //  checks whether username already exists, throws error if so. If not, continue.
     } else {
         $usernameQuery = mysqli_query($con, "SELECT * FROM `users` WHERE username = '" . $_POST['username'] . "'");
         if (mysqli_num_rows($usernameQuery)) {
-            // $usernameExists = "This Username already exists.";
-            $usernameErr = "This Username already exists.";
+            $usernameErr = "&nbsp This Username already exists. &nbsp";
         } else {
-            // $usernameExists = "";
             $usernameErr = "";
-
             $username = test_input($_POST['username']);
-
+            //  regex: alphanumerics allowed, min/max set from 2 to db constraint
             if (!preg_match("/^[a-zA-Z0-9]{5,20}$/", $username)) {
-                $usernameErr = "Must be a minimum of 5 characters with only numbers and letters.";
+                $usernameErr = "&nbsp Only letters & numbers, minimum 2 characters, maxiumum 20 allowed. &nbsp";
             }
         }
     }
 
 
     if (empty($_POST['fname'])) {
-        $fnameErr = "First Name is required.";
+        $fnameErr = "&nbsp First Name is required. &nbsp";
     } else {
         $fnameErr = "";
         $fname = test_input($_POST['fname']);
-
-        if (!preg_match("/^[a-zA-Z]{3,50}$/", $fname)) {
-            $fnameErr = "Only Captial letters and white spaces allowed.";
+        //  regex: min 2 chars, max 50 as per db constraint, only alphamumerics allowed
+        if (!preg_match("/^[a-zA-Z]{2,50}$/", $fname)) {
+            $fnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
         }
+        $lnameErr = "";
     }
 
     if (empty($_POST['lname'])) {
-        $lnameErr = "Last Name is required.";
+        $lnameErr = "&nbsp Last Name is required. &nbsp";
     } else {
         $lnameErr = "";
         $lname = test_input($_POST['lname']);
-
-        if (!preg_match("/^[a-zA-Z -]{3,50}$/", $lname)) {
-            $lnameErr = "Only Captial letters, white spaces and dashes allowed.";
+        //  regex: min 2 chars, max 50 as per db constraint, only alphamumerics allowed
+        if (!preg_match("/^[a-zA-Z -]{2,50}$/", $lname)) {
+            $lnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
         }
     }
 
     if (empty($_POST['phone'])) {
-        $phoneErr = "Phone Number is Required.";
+        $phoneErr = "&nbsp Phone Number is Required. &nbsp";
     } else {
         $phoneErr = "";
         $phone = test_input($_POST['phone']);
-
-        if (!preg_match("/^[0-9]{10,}$/", $phone)) {
-            $phoneErr = "Minimum of 10 digits required.";
+        //  regex: numbers only, min 10, max 11 as per db constraint. North American numbers only.
+        if (!preg_match("/^[0-9]{10,11}$/", $phone)) {
+            $phoneErr = "&nbsp Minimum of 10 digits, maximum 11, no dashes between required. &nbsp";
         }
     }
 
     if (empty($_POST['email'])) {
-        $emailErr = "Email is required.";
+        $emailErr = "&nbsp Email is required. &nbsp";
     } else {
         $emailErr = "";
         $email = test_input($_POST['email']);
-
+        //  regex: standard email format, must have @ and domain suffix
         if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/", $email)) {
-            $emailErr = "Invalid email format.";
+            $emailErr = "&nbsp Invalid email format. &nbsp";
         }
     }
 
     if (empty($_POST['password'])) {
-        $passwordErr = "Password is required.";
+        $passwordErr = "&nbsp Password is required. &nbsp";
     } else {
         $passwordErr = "";
         $password = test_input($_POST['password']);
-
+        //  regex: as the error states, but limited to 20 here and 100 in db because .md5 needs that space for the hashed password values after processing
         if (!preg_match("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/", $password)) {
-            $passwordErr = "Password must be between 8 & 20 characters with at least one special character, one uppercase letter and
-one digit.";
+            $passwordErr = "&nbsp Password must be between 8 & 20 characters with at least one special character, one uppercase letter and one digit. &nbsp";
         }
     }
 
@@ -106,31 +104,39 @@ one digit.";
         empty($passwordErr)
     ) {
 
+        //  first name and last name are converted to lowercase then thier first chars are capitalized, even if words are separated by space(s), new lines, tabs, dashes, return carriages or apostrophes (delimiters provided in arguments of ucwords()). Email is lowercased as well.
         $username = $_POST['username'];
+
         $fname = $_POST['fname'];
         $fname = ucwords(strtolower($fname), " \t\r\n'-");
+
         $lname = $_POST['lname'];
         $lname = ucwords(strtolower($lname), " \t\r\n'-");
+
         $phone = $_POST['phone'];
+
         $email = $_POST['email'];
+        $email = strtolower($email);
+
         $password = $_POST['password'];
 
+        //!hack for testing purposes, should be removed before presentation------
         if ($username == "admin") {
             $usertype = "admin";
         } else {
             $usertype = "user";
         }
+        //!---------------------------------------------------------------------
 
         $query = "INSERT into `users` (username, first_name, last_name, phone_number, email, `password`, usertype) VALUES ('" .
             $username . "', '" . $fname . "', '" . $lname . "', '" . $phone . "', '" . $email . "', '" . md5($password) . "', '" .
             $usertype . "')";
 
-        #execute query
         $result = mysqli_query($con, $query);
         if ($result) {
-            #if success
             $success = "You have registered successfully! <a href='login.php'> Log In here!</a>";
         }
+        //! should take an else for unsuccessful reg
     }
 }
 
@@ -152,19 +158,32 @@ one digit.";
     <!-- Form -->
     <form name="registration" action="" method="post">
         <!-- User Inputs -->
-        <input type="text" name="username" placeholder="Username" /><br>
-        <span class="error"><?php echo $usernameErr ?></span><br><br>
-        <input type="text" name="fname" placeholder="First Name" /><br>
-        <span class="error"><?php echo $fnameErr ?></span><br><br>
-        <input type="text" name="lname" placeholder="Last Name" /><br>
-        <span class="error"><?php echo $lnameErr ?></span><br><br>
-        <input type="text" name="phone" placeholder="Phone Number" /><br>
-        <span class="error"><?php echo $phoneErr ?></span><br><br>
-        <input type="text" name="email" placeholder="Email" /><br>
-        <span class="error"><?php echo $emailErr ?></span><br><br>
-        <input type="password" name="password" placeholder="Password" /><br>
-        <span class="error"><?php echo $passwordErr ?></span><br><br>
-
+        <label for="username">Username: </label>
+        <input type="text" name="username" placeholder="Ex: camaroZ22"
+            value="<?= (isset($username)) ? $username : ''; ?>" />
+        <span class="error"><?php echo $usernameErr ?></span>
+        <br>
+        <label for="fname">First Name: </label>
+        <input type="text" name="fname" placeholder="Ex: John" value="<?= (isset($fname)) ? $fname : ''; ?>" />
+        <span class="error"><?php echo $fnameErr ?></span>
+        <br>
+        <label for="lname">Last Name: </label>
+        <input type="text" name="lname" placeholder="Ex: Kimble" value="<?= (isset($lname)) ? $lname : ''; ?>" />
+        <span class="error"><?php echo $lnameErr ?></span>
+        <br>
+        <label for="phone">Phone Number: </label>
+        <input type="text" name="phone" placeholder="5556667777" value="<?= (isset($phone)) ? $phone : ''; ?>" />
+        <span class="error"><?php echo $phoneErr ?></span>
+        <br>
+        <label for="email">Email: </label>
+        <input type="text" name="email" placeholder="jkimble@website.ca"
+            value="<?= (isset($email)) ? $email : ''; ?>" />
+        <span class="error"><?php echo $emailErr ?></span>
+        <br>
+        <label for="password">Password: </label>
+        <input type="password" name="password" />
+        <span class="error"><?php echo $passwordErr ?></span>
+        <br>
         <input type="submit" name="submit" value="Register" />
     </form>
     <p><?php echo $success ?></p>

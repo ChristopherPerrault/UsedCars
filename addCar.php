@@ -10,8 +10,8 @@ include('./templates/header-logged-in.php');
 // -------------------------------------
 
 //  initializing error message variables and form entries to empty strings
-$makeErr = $modelErr = $yearErr = $mileageErr = $colorErr = $carConditionErr = $askPriceErr = $imagesErr = "";
-$make = $model = $year = $mileage = $color = $carCondition = $askPrice = $images = "";
+$makeErr = $modelErr = $yearErr = $mileageErr = $colorErr = $carConditionErr = $askPriceErr = "";
+$make = $model = $year = $mileage = $color = $carCondition = $askPrice  = "";
 
 //  all inputs passed through test_input() for security
 function test_input($data)
@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $askPrice = $_POST["asking_price"];
         //  matches mySQL date format, adds the current actual date
         $datePosted = date("Y.m.d");
-        
+
         $user_id = $_SESSION['user_id'];
 
         $addQuery = "INSERT INTO `cars`(user_id, make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $user_id . "', '" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
