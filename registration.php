@@ -157,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Registration</h1>
     <br>
     <!-- Form -->
-    <form name="registration" action="" method="post">
+    <form name="registration" action="" method="post" onsubmit="return validateUserRegForm()">
         <!-- User Inputs -->
         <label for="username">Username: </label>
         <input type="text" name="username" placeholder="Ex: camaroZ22"
@@ -166,18 +166,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br>
         <label for="fname">First Name: </label>
         <input type="text" name="fname" placeholder="Ex: John" value="<?= (isset($fname)) ? $fname : ''; ?>" />
-        <span class="error"><?php echo $fnameErr ?></span>
+        <!-- <span class="error"></span> -->
         <br>
         <label for="lname">Last Name: </label>
         <input type="text" name="lname" placeholder="Ex: Kimble" value="<?= (isset($lname)) ? $lname : ''; ?>" />
         <span class="error"><?php echo $lnameErr ?></span>
         <br>
         <label for="phone">Phone Number: </label>
-        <input type="text" name="phone" placeholder="5556667777" value="<?= (isset($phone)) ? $phone : ''; ?>" />
+        <input type="text" name="phone" placeholder="Ex: 5556667777" value="<?= (isset($phone)) ? $phone : ''; ?>" />
         <span class="error"><?php echo $phoneErr ?></span>
         <br>
         <label for="email">Email: </label>
-        <input type="text" name="email" placeholder="jkimble@website.ca"
+        <input type="text" name="email" placeholder="Ex: jkimble@website.ca"
             value="<?= (isset($email)) ? $email : ''; ?>" />
         <span class="error"><?php echo $emailErr ?></span>
         <br>

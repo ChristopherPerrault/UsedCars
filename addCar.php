@@ -166,7 +166,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>UsedCars | Add Car</title>
-    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
@@ -235,7 +234,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="submit" value="Confirm" class="bottom-btn confirm"><br>
             <input type="reset" value="Reset Form" class="bottom-btn reset">
 
-            <a href="userDash.php"><input type="submit" value="Go Back" class="bottom-btn back"></a>
+            <a href="userdashboard.php"><input type="submit" value="Go Back" class="bottom-btn back"></a>
 
         </form>
     </div>
