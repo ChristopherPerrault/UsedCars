@@ -48,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!preg_match("/^[a-zA-Z]{2,50}$/", $fname)) {
             $fnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
         }
-        $lnameErr = "";
     }
 
     if (empty($_POST['lname'])) {
@@ -58,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $lname = test_input($_POST['lname']);
         //  regex: min 2 chars, max 50 as per db constraint, only letters allowed
         if (!preg_match("/^[a-zA-Z -]{2,50}$/", $lname)) {
-            $lnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
+            $lnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed.&nbsp";
         }
     }
 

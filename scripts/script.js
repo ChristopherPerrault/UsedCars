@@ -40,7 +40,7 @@ function validateUserRegForm() {
     document.getElementById("fnameErr").innerHTML =
       "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
     document.getElementById("lnameErr").innerHTML =
-      "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
+      "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed.&nbsp";
     document.getElementById("phoneErr").innerHTML =
       "&nbsp Minimum of 10 digits, maximum 11, no dashes between required. &nbsp";
     document.getElementById("emailErr").innerHTML =
@@ -54,7 +54,7 @@ function validateUserRegForm() {
     console.log("Success");
   }
   // }
-
+}
   // -----ADDCAR.PHP VALIDATION-----
 
   function validateAddCarForm() {
@@ -160,6 +160,7 @@ function validateUserRegForm() {
           default:
             console.log("Form isn't empty but should work");
         }
+        return false;
       }
     });
   }
@@ -199,4 +200,4 @@ function validateUserRegForm() {
       }
     });
   }
-}
+
