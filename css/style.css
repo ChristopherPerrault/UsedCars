@@ -184,3 +184,45 @@ button#contact a:hover {
   color: white;
 }
 
+button#edit-report{
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #50abe9;
+  box-shadow: 2px 2px gray;
+}
+
+button#edit-report > a {
+  color: black;
+  padding: 5px;
+}
+
+button#edit-report > a:active {
+  box-shadow: none;
+}
+
+button#edit-report > a:hover {
+  color: white;
+}
+
+button#delete-report {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #c71212;
+  box-shadow: 2px 2px gray;
+}
+
+button#delete-report a {
+  color: black;
+  padding: 5px;
+}
+
+button#delete-report a:hover {
+  color: white;
+}
+
+button#delete-report a:active {
+  box-shadow: none;
+}
+
