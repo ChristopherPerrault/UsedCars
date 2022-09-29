@@ -7,18 +7,18 @@ include('templates/header-logged-in.php');
 
 
 <?php
-#check if user_id is set and store in variable
+// check if user_id is set and store in variable
 if (isset($_SESSION['user_id'])) {
 
     $user_id = $_SESSION['user_id'];
 
-    #query -> check if user exists
+    // query -> check if user exists
     $query = "SELECT * FROM `users` WHERE user_id = '" . $user_id . "'";
 
-    #execute query
+    // execute query
     $result = mysqli_query($con, $query) or die(mysqli_error($con));
 
-    #store user first name
+    // store user first name
     while ($row = mysqli_fetch_assoc($result)) {
         $first_name = $row['first_name'];
     }
@@ -58,7 +58,7 @@ if (isset($_SESSION['user_id'])) {
         $count = mysqli_num_rows($listings);
 
         if($count == 0) {
-            $add_car = "<p style='text-align:center;font-size:15pt;'> It looks like you do not have any active listings.<a href='addCar.php'> Add a car listing here!</a>";
+            $add_car = "<p style='text-align:center;font-size:15pt;'> It looks like you do not have any active listings.<a href='addCar.php'> Add a car listing here!</a></p>";
             echo $add_car;
         } else {
         ?>
@@ -84,7 +84,7 @@ if (isset($_SESSION['user_id'])) {
                 <td align="center"><?php echo $rows['make']; ?></td>
                 <td align="center"><?php echo $rows['model']; ?></td>
                 <td align="center"><?php echo $rows['year']; ?></td>
-                <td align="center"><?php echo $rows['mileage']; ?></td>
+                <td align="center"><?php echo $rows['mileage'] . " km"; ?></td>
                 <td align="center"><?php echo $rows['color']; ?></td>
                 <td align="center"><?php echo $rows['car_condition']; ?></td>
                 <td align="center"><?php echo "$".$rows['asking_price']; ?></td>
