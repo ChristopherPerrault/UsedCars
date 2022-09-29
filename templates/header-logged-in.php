@@ -42,6 +42,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">My Account</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="addCar.php">Add a Car Listing</a>
+                        </li>
 
                         <?php
                         #different nav display based on usertype (admin or user)
@@ -60,10 +63,9 @@
 
                         #check if admin or user -> enable or disable links 
                         if ($row['usertype'] == 'admin') { ?>
-
                             <li class="nav-item">
-                                <a class="nav-link disabled">Add a Car Listing</a>
-                            </li>   
+                                <a class="nav-link" href="searchDatabase.php">Search Database</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="#">Reports</a>
                             </li>
@@ -72,9 +74,7 @@
                             </li>
 
                         <?php } else { ?>
-                            <li class="nav-item">
-                                <a class="nav-link " href="addCar.php">Add a Car Listing</a>
-                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link disabled">Reports</a>
                             </li>
