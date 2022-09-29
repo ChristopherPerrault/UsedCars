@@ -1,14 +1,15 @@
 <!-- Header -->
 <?php
-require('../config/db.php');
-require('../config/auth.php');
-include('../templates/header-reports.php');
+require('config/db.php');
+require('config/auth.php');
+include('templates/header-logged-in.php');
 ?>
+
 
 
 <div class="container">
     <h1 class="text-center">Current Reports</h1><br>
-    <a href="add.php" class='btn btn-outline-dark mb-2'> <i class="bi bi-person-plus"></i> Generate New Report</a>
+    <a href="add-report.php" class='btn btn-outline-dark mb-2'> <i class="bi bi-person-plus"></i> Generate New Report</a>
 
     <table class="table table-striped table-bordered table-hover">
         <thead class="table-dark">
@@ -44,9 +45,9 @@ include('../templates/header-reports.php');
                     echo " <td >{$final_price} </td>";
 
 
-                    echo " <td class='text-center' > <a href='update.php?edit&contract_id={$contract_id}' class='btn btn-secondary'><i class='bi bi-pencil'></i> EDIT</a> </td>";
+                    echo " <td class='text-center' > <a href='update-report.php?edit&contract_id={$contract_id}' class='btn btn-secondary'><i class='bi bi-pencil'></i> EDIT</a> </td>";
 
-                    echo " <td  class='text-center'>  <a href='delete.php?contract_id={$contract_id}' class='btn btn-danger'> <i class='bi bi-trash'></i> DELETE</a> </td>";
+                    echo " <td  class='text-center'>  <a href='delete-report.php?contract_id={$contract_id}' class='btn btn-danger'> <i class='bi bi-trash'></i> DELETE</a> </td>";
                     echo " </tr> ";
                 }
                 ?>
@@ -56,4 +57,4 @@ include('../templates/header-reports.php');
 </div>
 
 <!-- Footer -->
-<?php include "../templates/footer.php" ?>
+<?php include "templates/footer.php" ?>

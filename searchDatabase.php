@@ -5,8 +5,9 @@ require('config/auth.php');
 include('templates/header-logged-in.php');
 ?>
 
+
+<div class="container mt-5">
 <h1 class="text-center">Search Database</h1>
-<div class="container">
   <form action="" method="post">
     <div class="form-group">
       <label for="selectedUser" class="form-label">Select a User: </label>

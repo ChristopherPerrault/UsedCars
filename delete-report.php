@@ -1,6 +1,6 @@
 <!-- Header -->
 <?php
-require('../config/db.php');
+require('config/db.php');
 ?>
 
 
