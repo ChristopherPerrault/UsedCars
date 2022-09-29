@@ -69,22 +69,21 @@ if (isset($_SESSION['user_id'])) {
     } else {
     ?>
 
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" name="form">
-        <label for="username">Username: </label>
-        <input type="text" name="username" value="<?php echo $rows['username'] ?>" /><br />
-        <label for="fname">First Name: </label>
-        <input type="text" name="fname" value="<?php echo $rows['first_name'] ?>" /><br />
-        <label for="fname">Last Name: </label>
-        <input type="text" name="lname" value="<?php echo $rows['last_name'] ?>" /><br />
-        <label for="phone">Phone Number: </label>
-        <input type="text" name="phone" value="<?php echo $rows['phone_number'] ?>" /><br />
-        <label for="email">Email: </label>
-        <input type="text" name="email" value="<?php echo $rows['email'] ?>" /><br />
-        <label for="password">Password: </label>
-        <input type="password" name="password" value="<?php echo $rows['password'] ?>" /><br /><br />
-        <input type="submit" name="update" value="Update Account" class="bottom-btn" /><br />
-        <a href="delete-account.php?user_id=<?php echo $rows['user_id'] ?>"><input type="button" value="Delete Account"
-                class="bottom-btn back"></a>
-    </form>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" name="form">
+            <label for="username">Username: </label>
+            <input type="text" name="username" value="<?php echo $rows['username'] ?>" /><br />
+            <label for="fname">First Name: </label>
+            <input type="text" name="fname" value="<?php echo $rows['first_name'] ?>" /><br />
+            <label for="fname">Last Name: </label>
+            <input type="text" name="lname" value="<?php echo $rows['last_name'] ?>" /><br />
+            <label for="phone">Phone Number: </label>
+            <input type="text" name="phone" value="<?php echo $rows['phone_number'] ?>" /><br />
+            <label for="email">Email: </label>
+            <input type="text" name="email" value="<?php echo $rows['email'] ?>" /><br />
+            <label for="password">Password: </label>
+            <input type="password" name="password" value="<?php echo $rows['password'] ?>" /><br /><br />
+            <input type="submit" name="update" value="Update Account" class="bottom-btn" /><br />
+            <a href="delete-account.php?user_id=<?php echo $rows['user_id'] ?>"><input type="button" value="Delete Account" class="bottom-btn back"></a>
+        </form>
     <?php } ?>
 </div>
