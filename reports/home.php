@@ -46,7 +46,7 @@ include('../templates/header-reports.php');
 
                     echo " <td class='text-center' > <a href='update.php?edit&contract_id={$contract_id}' class='btn btn-secondary'><i class='bi bi-pencil'></i> EDIT</a> </td>";
 
-                    echo " <td  class='text-center'>  <a href='delete.php?delete={$contract_id}' class='btn btn-danger'> <i class='bi bi-trash'></i> DELETE</a> </td>";
+                    echo " <td  class='text-center'>  <a href='delete.php?contract_id={$contract_id}' class='btn btn-danger'> <i class='bi bi-trash'></i> DELETE</a> </td>";
                     echo " </tr> ";
                 }
                 ?>
