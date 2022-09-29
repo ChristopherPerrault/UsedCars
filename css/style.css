@@ -197,7 +197,7 @@ button#delete-report {
   border-radius: 10px;
   padding: 5px;
   margin: 5px;
-  background-color: #c71212;
+  background-color: rgb(245, 101, 101);
   box-shadow: 2px 2px gray;
 }
 
