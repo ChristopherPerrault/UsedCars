@@ -1,38 +1,15 @@
 <!-- Header -->
 <?php
 require('../config/db.php');
-require('../config/auth.php');
-include('./../templates/header-reports.php');
 ?>
 
 
-<h1>Delete reports</h1>
+<?php
+$contract_id = $_REQUEST['contract_id'];
 
+$delete = "DELETE FROM `reports` WHERE `contract_id`='$contract_id'";
 
+$result = mysqli_query($con,$delete) or die ( mysqli_error($con));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- a BACK button to go to the home page -->
-<div class="container text-center mt-5">
-    <a href="home.php" class="btn btn-warning mt-5"> Back </a>
-</div>
-
-
-
-<!-- Footer -->
-<?php include "../templates/footer.php" ?>
+header("Location: home.php");
+?>
