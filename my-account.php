@@ -49,27 +49,6 @@ if (isset($_SESSION['user_id'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-<<<<<<< HEAD
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" name="form">
-        <label for="name">Username: </label>
-        <input type="text" name="name" value="<?php echo $rows['username'] ?>" /><br />
-        <label for="name">First Name: </label>
-        <input type="text" name="name" value="<?php echo $rows['first_name'] ?>" /><br />
-        <label for="name">Last Name: </label>
-        <input type="text" name="name" value="<?php echo $rows['last_name'] ?>" /><br />
-        <label for="name">Phone Number: </label>
-        <input type="text" name="name" value="<?php echo $rows['phone_number'] ?>" /><br />
-        <label for="phone">Email: </label>
-        <input type="text" name="phone" value="<?php echo $rows['email'] ?>" /><br />
-        <label for="email">Password: </label>
-        <input type="text" name="email" value="<?php echo $rows['password']; ?>" /><br /><br />
-        <a href="index-logged-in.php"><input type="button" class="bottom-btn back" value="Go Back"></a>
-    </form>
-</div>
-<?php
-include('./templates/footer.php');
-?>
-=======
         if ($password == $rows['password']) {
             $update = "UPDATE `users` set username='" . $username . "', first_name='" . $fname . "', last_name='" . $lname . "', 
             phone_number='" . $phone . "', email='" . $email . "', password='" . $password . "' WHERE user_id='$user_id';";
@@ -90,22 +69,22 @@ include('./templates/footer.php');
     } else {
     ?>
 
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" name="form">
-            <label for="username">Username: </label>
-            <input type="text" name="username" value="<?php echo $rows['username'] ?>" /><br />
-            <label for="fname">First Name: </label>
-            <input type="text" name="fname" value="<?php echo $rows['first_name'] ?>" /><br />
-            <label for="fname">Last Name: </label>
-            <input type="text" name="lname" value="<?php echo $rows['last_name'] ?>" /><br />
-            <label for="phone">Phone Number: </label>
-            <input type="text" name="phone" value="<?php echo $rows['phone_number'] ?>" /><br />
-            <label for="email">Email: </label>
-            <input type="text" name="email" value="<?php echo $rows['email'] ?>" /><br />
-            <label for="password">Password: </label>
-            <input type="password" name="password" value="<?php echo $rows['password'] ?>" /><br /><br />
-            <input type="submit" name="update" value="Update Account" class="bottom-btn" /><br />
-            <a href="delete-account.php?user_id=<?php echo $rows['user_id'] ?>"><input type="button" value="Delete Account" class="bottom-btn back"></a>
-        </form>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" name="form">
+        <label for="username">Username: </label>
+        <input type="text" name="username" value="<?php echo $rows['username'] ?>" /><br />
+        <label for="fname">First Name: </label>
+        <input type="text" name="fname" value="<?php echo $rows['first_name'] ?>" /><br />
+        <label for="fname">Last Name: </label>
+        <input type="text" name="lname" value="<?php echo $rows['last_name'] ?>" /><br />
+        <label for="phone">Phone Number: </label>
+        <input type="text" name="phone" value="<?php echo $rows['phone_number'] ?>" /><br />
+        <label for="email">Email: </label>
+        <input type="text" name="email" value="<?php echo $rows['email'] ?>" /><br />
+        <label for="password">Password: </label>
+        <input type="password" name="password" value="<?php echo $rows['password'] ?>" /><br /><br />
+        <input type="submit" name="update" value="Update Account" class="bottom-btn" /><br />
+        <a href="delete-account.php?user_id=<?php echo $rows['user_id'] ?>"><input type="button" value="Delete Account"
+                class="bottom-btn back"></a>
+    </form>
     <?php } ?>
 </div>
->>>>>>> 41ed4fd58f3c1a115eea339593506955fd6c2d24
