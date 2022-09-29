@@ -11,5 +11,5 @@ $delete = "DELETE FROM `reports` WHERE `contract_id`='$contract_id'";
 
 $result = mysqli_query($con,$delete) or die ( mysqli_error($con));
 
-header("Location: home.php");
+header("Location: view-report.php");
 ?>
