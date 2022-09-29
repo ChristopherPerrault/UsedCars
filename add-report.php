@@ -73,8 +73,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Make sure to select a User ID and a Car ID that go together!
   </p>
   <hr>
+<<<<<<< Updated upstream
   <form action="" method="post">
+=======
+</div>
+<div class="container mt-5">
+  <form id="databaseForm" action="" method="post">
+>>>>>>> Stashed changes
     <div class="form-group">
+      <h3>User ID and Car ID [INFO-TABLE]</h3>
+      <table class="listings">
+        <thead>
+          <tr>
+            <th><strong>User ID</strong></th>
+            <th><strong>Car ID</strong></th>
+            <th><strong>Username</strong></th>
+            <th><strong>Make</strong></th>
+            <th><strong>Model</strong></th>
+            <th><strong>Mileage</strong></th>
+            <th><strong>Asking Price</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $query = "SELECT users.user_id, cars.car_id, users.username, cars.make, cars.model, cars.mileage, cars.asking_price
+                FROM users
+                INNER JOIN cars ON users.user_id = cars.user_id;";
+          $view_reports = mysqli_query($con, $query);
+          while ($row = mysqli_fetch_assoc($view_reports)) {
+          ?>
+            <tr>
+              <td align="center"><?php echo $row['user_id']; ?></td>
+              <td align="center"><?php echo $row['car_id']; ?></td>
+              <td align="center"><?php echo $row['username']; ?></td>
+              <td align="center"><?php echo $row['make']; ?></td>
+              <td align="center"><?php echo $row['model']; ?></td>
+              <td align="center"><?php echo $row['mileage']; ?></td>
+              <td align="center"><?php echo $row['asking_price']; ?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+
       <label for="userID" class="form-label">Select a User ID: </label>
       <select name="userID">
         <?php
@@ -119,6 +159,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- a BACK button to go to the home page -->
 <div class="container text-center mt-5">
+<<<<<<< Updated upstream
+=======
+  <button id="back-b" class="mt-3 mb-3"><a href="view-report.php"> Back </a></button>
+>>>>>>> Stashed changes
 </div>
 
 
