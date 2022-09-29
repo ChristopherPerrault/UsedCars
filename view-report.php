@@ -33,7 +33,7 @@ include('templates/header-logged-in.php');
             <thead>
                 <tr>
                     <th><strong>Contract ID</strong></th>
-                    <th><strong>Contract Date</strong></th>
+                    
                     <th><strong>Username</strong></th>
                     <th><strong>Phone Number</strong></th>
                     <th><strong>Email</strong></th>
@@ -41,7 +41,9 @@ include('templates/header-logged-in.php');
                     <th><strong>Mileage</strong></th>
                     <th><strong>Date Posted</strong></th>
                     <th><strong>Asking Price</strong></th>
+                    <th><strong>Date of Sale</strong></th>
                     <th><strong>Final Price</strong></th>
+                    <th><strong>Status</strong></th>
                     <th><strong><button id="generate-report"><a href="add-report.php"> Generate New
                                     Report</a></button></strong></th>
                 </tr>
@@ -58,7 +60,6 @@ include('templates/header-logged-in.php');
                 ?>
                     <tr>
                         <td align="center"><?php echo $row['contract_id']; ?></td>
-                        <td align="center"><?php echo $row['date']; ?></td>
                         <td align="center"><?php echo $row['username']; ?></td>
                         <td align="center"><?php echo $row['phone_number']; ?></td>
                         <td align="center"><?php echo $row['email']; ?></td>
@@ -66,7 +67,9 @@ include('templates/header-logged-in.php');
                         <td align="center"><?php echo $row['mileage']; ?></td>
                         <td align="center"><?php echo $row['date_posted']; ?></td>
                         <td align="center"><?php echo $row['asking_price']; ?></td>
+                        <td align="center"><?php echo $row['date']; ?></td>
                         <td align="center"><?php echo $row['final_price']; ?></td>
+                        <td align="center">Sold</td>
                         <td align="center">
                             <button id="delete-report"><a href="delete-report.php?contract_id=<?php echo $row['contract_id']; ?>">Delete</a></button>
                         </td>
