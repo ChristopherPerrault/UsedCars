@@ -192,15 +192,3 @@ function emptyCheckerAddCar() {
     }
   });
 }
-
-// another nope:
-// function validateUserRegForm() {
-//  checkValidity must be placed on inputs or selects
-//   const regBtn = document.getElementById("userRegSubmitBtn");
-//   if (!regBtn.checkValidity()) {
-//     document.getElementById("fnameErr").innerHTML = "Invalid entry";
-//     console.log("something");
-//     regBtn;
-//     return false;
-//   }
-// }
