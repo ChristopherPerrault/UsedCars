@@ -5,8 +5,18 @@ require('config/auth.php');
 include('templates/header-logged-in.php');
 ?>
 
-<h1 class="text-center">Search Database</h1>
-<div class="container">
+
+<div class="container mt-5">
+<h1 class="text-center">Search Database</h1><br>
+    <p class="text-center">
+        Choose the information you want to fetch from the database!
+    </p>
+    <p class="text-center">
+        You can even save it to a text file!
+    </p>
+    <hr>
+</div>
+<div class="container mt-5">
   <form action="" method="post">
     <div class="form-group">
       <label for="selectedUser" class="form-label">Select a User: </label>
@@ -115,15 +125,9 @@ include('templates/header-logged-in.php');
     ?>
 
     <div class="form-group">
-      <input type="submit" name="submit" class="btn btn-primary mt-2" value="Generate Report">
+      <input id="generate-report" type="submit" name="submit" value="View Info">
     </div>
   </form>
-</div>
-
-
-<!-- a BACK button to go to the home page -->
-<div class="container text-center mt-5">
-  <a href="home.php" class="btn btn-warning mt-5"> Back </a>
 </div>
 
 

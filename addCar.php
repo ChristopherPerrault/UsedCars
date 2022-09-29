@@ -5,13 +5,12 @@ include('./config/auth.php');
 include('./templates/header-logged-in.php');
 
 
-//--------------------------------------
-// !important - work in progress - Chris
-// -------------------------------------
-
 //  initializing error message variables and form entries to empty strings
 $makeErr = $modelErr = $yearErr = $mileageErr = $colorErr = $carConditionErr = $askPriceErr = "";
 $make = $model = $year = $mileage = $color = $carCondition = $askPrice  = "";
+
+//  initializing a success/fail message
+$message = "";
 
 //  all inputs passed through test_input() for security
 function test_input($data)
@@ -142,18 +141,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $addQuery = "INSERT INTO `cars`(user_id, make, model, `year`, mileage, color, car_condition, asking_price, date_posted) VALUES ('" . $user_id . "', '" . $make . "', '" . $model . "', '" . $year . "', '" . $mileage . "', '" . $color . "',  '" . $carCondition . "',  '" . $askPrice . "',  '" . $datePosted . "')";
 
-        $flag = mysqli_query($con, $addQuery);
+        $result = mysqli_query($con, $addQuery);
+        $success = "Car added successfully! <a href='login.php'> Add another listing?</a>";
+        $fail = "Unsuccessful registration, check your entries";
 
-        if ($flag) {
-            echo '<span class="success">Car has been successfully added</span>';
-        } else {
-            die("Cannot add record" . mysqli_error($con));
-        }
-    } else {
-        //! needs to be fixed so it doesn't show as it does in top right corner
-        echo '<span class="error">Form Incomplete</span>';
+        $message = $result ? $success : $fail;
     }
 }
+
 
 
 ?>
@@ -170,7 +165,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="container">
-        <form name="addCar" onsubmit="return validateAddCarForm()" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <form name="addCar" onsubmit="return validateAddCarForm()"
+            action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 
             <label for="make">Car Make: </label>
             <input type="text" name="make" placeholder="Ex: Honda" value="<?= (isset($make)) ? $make : ''; ?>"><br>
@@ -178,7 +174,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             <label for="model">Car Model: </label>
-            <input type="text" name="model" placeholder="Ex: Accord" value="<?= (isset($model)) ? $model : ''; ?>"><br><span id="modelErr" class="error"><?= $modelErr ?></span>
+            <input type="text" name="model" placeholder="Ex: Accord"
+                value="<?= (isset($model)) ? $model : ''; ?>"><br><span id="modelErr"
+                class="error"><?= $modelErr ?></span>
 
 
             <label for="year">Year: </label>
@@ -187,7 +185,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             <label for="mileage">Mileage: </label>
-            <input type="text" name="mileage" placeholder="Ex: 210000" value="<?= (isset($mileage)) ? $mileage : ''; ?>">
+            <input type="text" name="mileage" placeholder="Ex: 210000"
+                value="<?= (isset($mileage)) ? $mileage : ''; ?>">
 
             <!-- Mileage selector toggle: km/mi, km by default -->
             <label class="switch">
@@ -219,22 +218,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <br>
 
             <label for="asking_price">Asking Price: </label>
-            <input type="text" name="asking_price" placeholder="Ex: 2400" value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
+            <input type="text" name="asking_price" placeholder="Ex: 2400"
+                value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
             <span id="askPriceErr" class="error"><?= $askPriceErr ?></span>
-
-
-            <!-- <label>Select Image File:</label>
-            <input type="file" name="image">
-            <input type="submit" name="submitImage" value="Upload" formaction="./config/uploadImage.php"> -->
 
             <br>
             <!-- bottom-of-form buttons -->
             <input type="submit" value="Confirm" class="bottom-btn confirm"><br>
-            <input type="reset" value="Reset Form" class="bottom-btn reset">
 
             <a href="userdashboard.php"><input type="button" value="Go Back" class="bottom-btn back"></a>
 
         </form>
+        <?php echo "<span><strong>$message</strong></span>"; ?>
+
     </div>
 </body>
 <?php
