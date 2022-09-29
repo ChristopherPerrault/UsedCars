@@ -73,13 +73,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Make sure to select a User ID and a Car ID that go together!
   </p>
   <hr>
-<<<<<<< Updated upstream
   <form action="" method="post">
-=======
 </div>
 <div class="container mt-5">
   <form id="databaseForm" action="" method="post">
->>>>>>> Stashed changes
     <div class="form-group">
       <h3>User ID and Car ID [INFO-TABLE]</h3>
       <table class="listings">
@@ -159,10 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- a BACK button to go to the home page -->
 <div class="container text-center mt-5">
-<<<<<<< Updated upstream
-=======
   <button id="back-b" class="mt-3 mb-3"><a href="view-report.php"> Back </a></button>
->>>>>>> Stashed changes
 </div>
 
 
