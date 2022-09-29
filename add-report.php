@@ -68,7 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <div class="container mt-5">
-<h1 class="text-center">Create Official Contract for Sold Car</h1>
+  <h1 class="text-center">Create Official Contract for Sold Car</h1>
+  <p class="text-center">
+    Make sure to select a User ID and a Car ID that go together!
+  </p>
+  <hr>
+</div>
+<div class="container mt-5">
   <form action="" method="post">
     <div class="form-group">
       <label for="userID" class="form-label">Select a User ID: </label>
@@ -105,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="form-group">
-      <input type="submit" name="submit" class="btn btn-primary mt-2" value="Generate Report">
+      <input id="generate-report" type="submit" name="submit" value="Generate Report">
     </div>
   </form>
 </div>
@@ -114,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- a BACK button to go to the home page -->
 <div class="container text-center mt-5">
-  <a href="view-report.php" class="btn btn-warning mt-5"> Back </a>
+  <button id="back-b" class="mt-3 mb-3"><a  href="view-report.php"> Back </a></button>
 </div>
 
 
