@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $fnameErr = "";
         $fname = test_input($_POST['fname']);
-        //  regex: min 2 chars, max 50 as per db constraint, only alphamumerics allowed
+        //  regex: min 2 chars, max 50 as per db constraint, only letters allowed
         if (!preg_match("/^[a-zA-Z]{2,50}$/", $fname)) {
             $fnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
         }
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $lnameErr = "";
         $lname = test_input($_POST['lname']);
-        //  regex: min 2 chars, max 50 as per db constraint, only alphamumerics allowed
+        //  regex: min 2 chars, max 50 as per db constraint, only letters allowed
         if (!preg_match("/^[a-zA-Z -]{2,50}$/", $lname)) {
             $lnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
         }
@@ -158,35 +158,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Registration</h1>
     <br>
     <!-- Form -->
-    <form name="registration" action="" method="post" onsubmit="return validateUserRegForm()">
+    <form id="regForm" name="registration" action="" method="post" onsubmit="return validateUserRegForm()">
         <!-- User Inputs -->
         <label for="username">Username: </label>
-        <input type="text" name="username" placeholder="Ex: camaroZ22"
-            value="<?= (isset($username)) ? $username : ''; ?>" />
-        <span class="error"><?php echo $usernameErr ?></span>
+        <input id="username" type="text" name="username" placeholder="Ex: camaroZ22" value="<?= (isset($username)) ? $username : ''; ?>" />
+        <div id="error"></div>
+        <span id="usernameErr" class="error"><?php echo $usernameErr ?></span>
         <br>
         <label for="fname">First Name: </label>
         <input type="text" name="fname" placeholder="Ex: John" value="<?= (isset($fname)) ? $fname : ''; ?>" />
-        <span class="error"><?php echo $fnameErr ?></span>
+        <span id="fnameErr" class="error"><?php echo $fnameErr ?></span>
         <br>
         <label for="lname">Last Name: </label>
         <input type="text" name="lname" placeholder="Ex: Kimble" value="<?= (isset($lname)) ? $lname : ''; ?>" />
-        <span class="error"><?php echo $lnameErr ?></span>
+        <span id="lnameErr" class="error"><?php echo $lnameErr ?></span>
         <br>
         <label for="phone">Phone Number: </label>
         <input type="text" name="phone" placeholder="Ex: 5556667777" value="<?= (isset($phone)) ? $phone : ''; ?>" />
-        <span class="error"><?php echo $phoneErr ?></span>
+        <span id="phoneErr" class="error"><?php echo $phoneErr ?></span>
         <br>
         <label for="email">Email: </label>
-        <input type="text" name="email" placeholder="Ex: jkimble@website.ca"
-            value="<?= (isset($email)) ? $email : ''; ?>" />
-        <span class="error"><?php echo $emailErr ?></span>
+        <input type="text" name="email" placeholder="Ex: jkimble@website.ca" value="<?= (isset($email)) ? $email : ''; ?>" />
+        <span id="emailErr" class="error"><?php echo $emailErr ?></span>
         <br>
         <label for="password">Password: </label>
         <input type="password" name="password" />
-        <span class="error"><?php echo $passwordErr ?></span>
+        <span id="passwordErr" class="error"><?php echo $passwordErr ?></span>
         <br>
-        <input type="submit" name="submit" value="Register" />
+        <input id="userRegSubmitBtn" type="submit" name="submit" value="Register" />
     </form>
     <p><?php echo $message ?></p>
 
