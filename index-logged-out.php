@@ -23,7 +23,7 @@ include('templates/header-logged-out.php');
     </p>
 
     <p class="text-center"><a href="registration.php">Join us to add your own listings or purchase active ones!</a></p>
-    <hr>
+
 
 
     <?php

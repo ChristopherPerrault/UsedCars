@@ -169,7 +169,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <p class="text-center">
         Add a new car for sale to your account.
     </p>
-    <hr>
     <form name="addCar" onsubmit="return validateAddCarForm()"
         action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 

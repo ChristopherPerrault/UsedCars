@@ -12,7 +12,6 @@ include('templates/header-logged-in.php');
     <p class="text-center">
         Build Reports and Export them to your local computer!
     </p>
-    <hr>
     <?php
     $add_report = "";
     $view_reports = "SELECT * FROM `reports`;";

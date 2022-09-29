@@ -31,7 +31,6 @@ $accounts = mysqli_query($con, $query) or die(mysqli_error($con));
     </p>
 
     <p class="text-center">You can view or delete any account.</p>
-    <hr>
     <table class="listings">
         <thead>
             <tr>

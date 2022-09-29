@@ -44,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
     </p>
 
     <p class="text-center">Check out all of your listings below:</p>
-    <hr>
+
 
     <?php
     $add_car = "";

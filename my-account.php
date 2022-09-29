@@ -39,7 +39,7 @@ if (isset($_SESSION['user_id'])) {
     </p>
 
     <p class="text-center">You can edit or delete your account here.</p>
-    <hr>
+
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['username'];

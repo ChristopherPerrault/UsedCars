@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php echo $finalPriceErr; ?>
 
         <?php
-        echo "<br><br><hr>";
+        echo "<br><br>";
         echo "$success";
         echo "$failure";
         ?>
@@ -148,6 +148,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <button id="back-b" class="mt-3 mb-3"><a href="view-report.php"> Back </a></button>
     </form>
   </div>
-  
+
   <!-- Footer -->
   <?php include "templates/footer.php" ?>
