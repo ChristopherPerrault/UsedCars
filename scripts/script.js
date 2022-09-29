@@ -36,7 +36,7 @@ function validateUserRegForm() {
     console.log("Form not submitted");
     // each error span receives a matching error to its PHP counterpart
     document.getElementById("usernameErr").innerHTML =
-      "&nbsp Only letters & numbers, minimum 5 characters, maxiumum 20 allowed. &nbsp/";
+      "&nbsp Only letters & numbers, minimum 5 characters, maxiumum 20 allowed. &nbsp";
     document.getElementById("fnameErr").innerHTML =
       "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
     document.getElementById("lnameErr").innerHTML =
