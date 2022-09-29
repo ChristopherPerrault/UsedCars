@@ -44,7 +44,7 @@ $rows = mysqli_fetch_assoc($result);
             $result2 = mysqli_query($con, $update);
 
             if ($result2) {
-                $status = "<p style='font-size:15pt; text-align:center;'>You have successfully updated your listing. <a href='userdashboard.php'>View updated listing here!</a>";
+                $status = "<p style='font-size:15pt; text-align:center;'>You have successfully updated your listing. <a href='userdashboard.php'>View updated listing here!</a></p>";
                 echo $status;
             } else {
                 $status = "<p style='font-size:15pt text-align:center;'>Update unsuccessful. Please try again.</p>";

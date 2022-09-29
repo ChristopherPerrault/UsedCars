@@ -1,11 +1,11 @@
 <?php
-#initialize session data
+// initialize session data
 session_start();
 
-#destroying all sessions
+// destroying all sessions
 if (session_destroy()) {
 
-    #redirect to login page
+    // redirect to login page
     header("Location: login.php");
 }
 ?>
