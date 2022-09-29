@@ -17,7 +17,7 @@ include('templates/header-logged-in.php');
   <hr>
 </div>
 <div class="container mt-5">
-  <form action="" method="post">
+  <form id="databaseForm" action="" method="post">
     <div class="form-group">
       <label for="selectedUser" class="form-label">Select a User: </label>
       <select name="selectedUser">
