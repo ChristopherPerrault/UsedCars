@@ -77,8 +77,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $colorErr = "";
         $color = test_input($_POST["color"]);
-        if (!preg_match("/^[a-zA-Z ]*$/", $color)) {
-            $colorErr = "&nbsp Only letters and spaces allowed &nbsp";
+        if (!preg_match("/^[a-zA-Z -]*$/", $color)) {
+            $colorErr = "&nbsp Only letters, spaces and dashes allowed &nbsp";
         }
     }
     //  just-in-case check, but not necessary as this is a select/optgroup
@@ -170,26 +170,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="container">
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+        <form name="addCar" onsubmit="return validateAddCarForm()" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 
             <label for="make">Car Make: </label>
             <input type="text" name="make" placeholder="Ex: Honda" value="<?= (isset($make)) ? $make : ''; ?>"><br>
-            <span class="error"><?= $makeErr ?></span>
+            <span id="makeErr" class="error"><?= $makeErr ?></span>
 
 
             <label for="model">Car Model: </label>
-            <input type="text" name="model" placeholder="Ex: Accord"
-                value="<?= (isset($model)) ? $model : ''; ?>"><br><span class="error"><?= $modelErr ?></span>
+            <input type="text" name="model" placeholder="Ex: Accord" value="<?= (isset($model)) ? $model : ''; ?>"><br><span id="modelErr" class="error"><?= $modelErr ?></span>
 
 
             <label for="year">Year: </label>
             <input type="text" name="year" placeholder="Ex: 1998" value="<?= (isset($year)) ? $year : ''; ?>"><br>
-            <span class="error"><?= $yearErr ?></span>
+            <span id="yearErr" class="error"><?= $yearErr ?></span>
 
 
             <label for="mileage">Mileage: </label>
-            <input type="text" name="mileage" placeholder="Ex: 210000"
-                value="<?= (isset($mileage)) ? $mileage : ''; ?>">
+            <input type="text" name="mileage" placeholder="Ex: 210000" value="<?= (isset($mileage)) ? $mileage : ''; ?>">
 
             <!-- Mileage selector toggle: km/mi, km by default -->
             <label class="switch">
@@ -197,12 +195,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <span class="slider round"></span>
             </label>
 
-            <br><span class="error"><?= $mileageErr ?></span>
+            <br><span id="mileageErr" class="error"><?= $mileageErr ?></span>
 
 
             <label for="color">Color: </label>
             <input type="text" name="color" placeholder="Ex: Blue" value="<?= (isset($color)) ? $color : ''; ?>"><br>
-            <span class="error"><?= $colorErr ?></span>
+            <span id="colorErr" class="error"><?= $colorErr ?></span>
 
 
             <label for="car_condition">Condition:</label>
@@ -216,13 +214,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="Very Poor">Very Poor</option>
                 </optgroup>
             </select>
-            <span class="error"><?= $carConditionErr ?></span>
+            <!-- error technically not needed: -->
+            <span id="carConditionErr" class="error"><?= $carConditionErr ?></span>
             <br>
 
             <label for="asking_price">Asking Price: </label>
-            <input type="text" name="asking_price" placeholder="Ex: 2400"
-                value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
-            <span class="error"><?= $askPriceErr ?></span>
+            <input type="text" name="asking_price" placeholder="Ex: 2400" value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
+            <span id="askPriceErr" class="error"><?= $askPriceErr ?></span>
 
 
             <!-- <label>Select Image File:</label>
