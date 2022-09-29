@@ -3,7 +3,6 @@
   margin: 0 auto;
 }
 
-/* ---FORM MESSAGES--- */
 .success {
   color: black;
   border: 1px solid white;
@@ -28,7 +27,7 @@
 }
 
 .container {
-  background-color: darkolivegreen;
+  background-color: #b4eafd;
 }
 
 /* ---FORMS--- */
@@ -110,3 +109,61 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* User Dashboard Table */
+.listings {
+  border: 5px solid gray
+}
+
+.listings > tbody > tr > td, .listings > thead > tr > th {
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+  padding: 5px 10px 5px 10px;
+}
+
+th#empty {
+  background-color: gray;
+}
+
+button#edit-car {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #50abe9;
+  box-shadow: 2px 2px gray;
+}
+
+button#edit-car > a {
+  color: black;
+  padding: 5px;
+}
+
+button#edit-car > a:active {
+  box-shadow: none;
+}
+
+button#edit-car > a:hover {
+  color: white;
+}
+
+button#delete-car {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #c71212;
+  box-shadow: 2px 2px gray;
+}
+
+button#delete-car a {
+  color: black;
+  padding: 5px;
+}
+
+button#delete-car a:hover {
+  color: white;
+}
+
+button#delete-car a:active {
+  box-shadow: none;
+}
+

@@ -1,5 +1,7 @@
 <!-- Header -->
 <?php
+require('config/db.php');
+include('config/auth.php');
 include('templates/header-logged-in.php');
 ?>
 
@@ -29,7 +31,6 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/style.css" />
     <title>UsedCars | Dashboard</title>
 </head>
 
@@ -42,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
         This is your home page -- You can chillout here
     </p>
 
-    <p class="text-center">Check out all these cool listings below</p>
+    <p class="text-center">Check out all of your listings below!</p>
     <hr>
 </div>
 <div> 
@@ -64,14 +65,15 @@ if (isset($_SESSION['user_id'])) {
     <table class="listings">
         <thead>
             <tr>
-                <th><strong>Car Make</strong></th>
-                <th><strong>Car Model</strong></th>
+                <th><strong>Make</strong></th>
+                <th><strong>Model</strong></th>
                 <th><strong>Year</strong></th>
                 <th><strong>Mileage</strong></th>
                 <th><strong>Color</strong></th>
                 <th><strong>Condition</strong></th>
                 <th><strong>Asking Price</strong></th>
                 <th><strong>Date Posted</strong></th>
+                <th id="empty"></th>
             </tr>
         </thead>
         <tbody>
@@ -87,6 +89,10 @@ if (isset($_SESSION['user_id'])) {
                 <td align="center"><?php echo $rows['car_condition']; ?></td>
                 <td align="center"><?php echo "$".$rows['asking_price']; ?></td>
                 <td align="center"><?php echo $rows['date_posted']; ?></td>
+                <td align="center">
+                    <button id="edit-car"><a href="edit-car.php?car_id=<?php echo $rows['car_id']; ?>">Edit</a></button>
+                    <button id="delete-car"><a href="delete-car.php?car_id=<?php echo $rows['car_id']; ?>">Delete</a></button>
+                </td>
             </tr>
             <?php } ?>
         </tbody>

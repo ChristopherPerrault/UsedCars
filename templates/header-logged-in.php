@@ -62,14 +62,19 @@
                         if ($row['usertype'] == 'admin') { ?>
 
                             <li class="nav-item">
-                                <a class="nav-link " href="reports/home.php">Reports</a>
+                                <a class="nav-link disabled">Add a Car Listing</a>
+                            </li>   
+                            <li class="nav-item">
+                                <a class="nav-link " href="#">Reports</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Accounts</a>
                             </li>
 
                         <?php } else { ?>
-
+                            <li class="nav-item">
+                                <a class="nav-link " href="addCar.php">Add a Car Listing</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled">Reports</a>
                             </li>
