@@ -29,9 +29,8 @@ include('templates/header-logged-in.php');
 
 <!-- a BACK button to go to the home page -->
 <div class="container text-center mt-5">
-  <a href="view-report.php" class="btn btn-warning mt-5"> Back </a>
+  <button id="back-b" class="mt-3 mb-3"><a  href="view-report.php"> Back </a></button>
 </div>
-
 
 <!-- Footer -->
 <?php include "templates/footer.php" ?>

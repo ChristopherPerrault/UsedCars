@@ -162,7 +162,8 @@ button#edit-car > a:hover {
   color: white;
 }
 
-button#delete-car {
+button#delete-car,
+button#delete-report {
   border-radius: 10px;
   padding: 5px;
   margin: 5px;
@@ -170,16 +171,19 @@ button#delete-car {
   box-shadow: 2px 2px gray;
 }
 
-button#delete-car a {
+button#delete-car a,
+button#delete-report a {
   color: black;
   padding: 5px;
 }
 
-button#delete-car a:hover {
+button#delete-car a:hover,
+button#delete-report a:hover {
   color: white;
 }
 
-button#delete-car a:active {
+button#delete-car a:active,
+button#delete-report a:active {
   box-shadow: none;
 }
 
@@ -221,24 +225,27 @@ button#edit-report > a:hover {
   color: white;
 }
 
-button#delete-report {
+button#generate-report,
+input#generate-report {
   border-radius: 10px;
   padding: 5px;
   margin: 5px;
-  background-color: #c71212;
+  background-color: #69c712;
   box-shadow: 2px 2px gray;
 }
 
-button#delete-report a {
+button#generate-report a {
   color: black;
   padding: 5px;
 }
 
-button#delete-report a:hover {
+button#generate-report a:hover,
+input#generate-report:hover {
   color: white;
 }
 
-button#delete-report a:active {
+button#generate-report a:active,
+input#generate-report:active {
   box-shadow: none;
 }
 
@@ -256,4 +263,24 @@ button#delete-report a:active {
   background-color: aliceblue;
   color: rgb(0, 0, 0);
   text-shadow: 1px 1px whitesmoke;
+}
+button#back-b {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #2291db;
+  box-shadow: 2px 2px gray;
+}
+
+button#back-b a {
+  color: black;
+  padding: 5px;
+}
+
+button#back-b a:hover {
+  color: white;
+}
+
+button#back-b a:active {
+  box-shadow: none;
 }

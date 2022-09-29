@@ -125,15 +125,9 @@ include('templates/header-logged-in.php');
     ?>
 
     <div class="form-group">
-      <input type="submit" name="submit" class="btn btn-primary mt-2" value="Generate Report">
+      <input id="generate-report" type="submit" name="submit" value="View Info">
     </div>
   </form>
-</div>
-
-
-<!-- a BACK button to go to the home page -->
-<div class="container text-center mt-5">
-  <a href="home.php" class="btn btn-warning mt-5"> Back </a>
 </div>
 
 
