@@ -1,15 +1,15 @@
 "use strict";
-
-//! the problem here is that it blocks the duplicate username PHP error message. Solve or remove checking username?
+//  This is the first pass of validation for AddCar.php and registration.php. If any of these checks fail, the form is not submitted and an error message is produced. If erroneous values make it through this Javascript check, the PHP error handling will take over. The error messages are indistinguishable whether the source so that the user does not recieve conflicting information.
 
 // -----REGISTRATION.PHP VALIDATION-----
 function validateUserRegForm() {
+  emptyCheckerUserReg();
   //  receiving and storing the form entries
   //  NOTE: this method retrieves all entries as strings, so they are cast to type Number where applicable
   let username = document.forms["registration"]["username"].value;
   let fname = document.forms["registration"]["fname"].value;
   let lname = document.forms["registration"]["lname"].value;
-  let phone = document.forms["registration"]["phone"].value;
+  let phone = Number(document.forms["registration"]["phone"].value);
   let email = document.forms["registration"]["email"].value;
   let password = document.forms["registration"]["password"].value;
 
@@ -56,42 +56,17 @@ function validateUserRegForm() {
 // -----ADDCAR.PHP VALIDATION-----
 
 function validateAddCarForm() {
-  // emptyChecker();
+  emptyCheckerAddCar();
   //  NOTE: this function is called first so as to not have possible empty-value PHP error messages from being blocked by Javascript. This happens because being client-side, JS runs before server-side PHP, so for example if an input is empty, the "empty" PHP error message will be overwritten by JS regex-check error messages - the result being an empty field on submission will not show the user the correct error.
 
   //  receiving and storing the form entries
-  //  NOTE: this method retrieves all entries as strings, so they are cast to type Number where applicable
+  //  NOTE: this method retrieves all entries as strings, so they are cast to type Number where applicable. Year is checked differently near the end  of this function.
   let make = document.forms["addCar"]["make"].value;
   let model = document.forms["addCar"]["model"].value;
   let year = Number(document.forms["addCar"]["year"].value);
   let mileage = Number(document.forms["addCar"]["mileage"].value);
   let color = document.forms["addCar"]["color"].value;
   let asking_price = Number(document.forms["addCar"]["asking_price"].value);
-
-  //! needs a fixin'
-  //  checks for empty values (before regex checking)
-  let inputs = [make, model, year, mileage, color, asking_price];
-  inputs.forEach((input) => {
-    if (input === "" || input === 0) {
-      switch (input) {
-        case make:
-          document.getElementById("makeErr").innerHTML = "&nbsp test &nbsp";
-        case model:
-          document.getElementById("modelErr").innerHTML = "&nbsp test2 &nbsp";
-        case year:
-          document.getElementById("yearErr").innerHTML = "&nbsp test3 &nbsp";
-        case mileage:
-          document.getElementById("mileageErr").innerHTML = "&nbsp test4 &nbsp";
-        case color:
-          document.getElementById("colorErr").innerHTML = "&nbsp test5 &nbsp";
-        case asking_price:
-          document.getElementById("askPriceErr").innerHTML =
-            "&nbsp test6 &nbsp";
-        default:
-          console.log("Form isn't empty");
-      }
-    }
-  });
 
   //  preparing regexes for each form entry
   const makeRegex = /^[a-zA-Z -]*$/;
@@ -106,9 +81,6 @@ function validateAddCarForm() {
   const mileageCheck = mileageRegex.exec(mileage);
   const colorCheck = colorRegex.exec(color);
   const askingPriceCheck = askingPriceRegex.exec(asking_price);
-
-  //  fetches and stores current year
-  const currentYear = new Date().getFullYear();
 
   if (
     (makeCheck, modelCheck, mileageCheck, colorCheck, askingPriceCheck === null)
@@ -128,20 +100,98 @@ function validateAddCarForm() {
 
     //  the form interprets 'false' as to not submit the form
     return false;
-    //! needs to be within scope because 'Invalid year' now shows up no matter what
-  } else if (year < 1930 || year > currentYear || isNaN(year)) {
-    document.getElementById("yearErr").innerHTML = "&nbsp Invalid year &nbsp";
+  }
+
+  //  fetches and stores current year to check against
+  const currentYear = new Date().getFullYear();
+
+  //  year checker
+  if (year == "") {
+    document.getElementById("yearErr").innerHTML = "&nbsp Field required &nbsp";
+    return false;
+  } else if (year < 1930 || year > currentYear) {
+    document.getElementById("yearErr").innerHTML = "&nbsp Invalid Year &nbsp";
     return false;
   } else console.log("Success");
-
-  // function emptyChecker(inputs) {
-  //   if (inputs === "" || inputs === 0) {
-  //     document.getElementById("makeErr").innerHTML = "&nbsp test &nbsp";
-  //   }
-  // }
 } //end validateAddCarForm()
 
-//----------------------------------------------------------------------
+//----------------------------EMPTY FORM CHECKERS------------------------------------
+//  checks for empty values (before regex checking)
+function emptyCheckerUserReg() {
+  //  receiving and storing the form entries
+  //  NOTE: this method retrieves all entries as strings, so they are cast to type Number where applicable
+  let username = document.forms["registration"]["username"].value;
+  let fname = document.forms["registration"]["fname"].value;
+  let lname = document.forms["registration"]["lname"].value;
+  let phone = Number(document.forms["registration"]["phone"].value);
+  let email = document.forms["registration"]["email"].value;
+  let password = document.forms["registration"]["password"].value;
+
+  //  stores inputs as array, foreach loop feeds inputs into a switch when entries are empty or null and returns appropraite messages to the HTML error message spans
+  let inputs = [username, fname, lname, phone, email, password];
+  inputs.forEach((input) => {
+    if (input === "" || input === 0) {
+      switch (input) {
+        case username:
+          document.getElementById("usernameErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case fname:
+          document.getElementById("fnameErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case lname:
+          document.getElementById("lnameErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case phone:
+          document.getElementById("phoneErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case email:
+          document.getElementById("emailErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case password:
+          document.getElementById("passwordErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        default:
+          console.log("Form isn't empty but should work");
+      }
+    }
+  });
+}
+
+function emptyCheckerAddCar() {
+  //  checks for empty values (before regex checking)
+  //  year excluded as it it already checked in validateAddCarForm()
+  let make = document.forms["addCar"]["make"].value;
+  let model = document.forms["addCar"]["model"].value;
+  let mileage = Number(document.forms["addCar"]["mileage"].value);
+  let color = document.forms["addCar"]["color"].value;
+  let asking_price = Number(document.forms["addCar"]["asking_price"].value);
+
+  //  stores inputs as array, foreach loop feeds inputs into a switch when entries are empty or null and returns appropraite messages to the HTML error message spans
+  let inputs = [make, model, mileage, color, asking_price];
+  inputs.forEach((input) => {
+    if (input === "" || input === 0) {
+      switch (input) {
+        case make:
+          document.getElementById("makeErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case model:
+          document.getElementById("modelErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case mileage:
+          document.getElementById("mileageErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case color:
+          document.getElementById("colorErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        case asking_price:
+          document.getElementById("askPriceErr").innerHTML =
+            "&nbsp Field required &nbsp";
+        default:
+          console.log("Form isn't empty");
+      }
+    }
+  });
+}
 
 // another nope:
 // function validateUserRegForm() {
@@ -152,23 +202,5 @@ function validateAddCarForm() {
 //     console.log("something");
 //     regBtn;
 //     return false;
-//   }
-// }
-
-// this actually worked as an "empty fields checker" but messages were overwritten
-// function validateUserRegForm() {
-//   let username = document.forms["registration"]["username"].value;
-// let fname = document.forms["registration"]["fname"].value;
-// let lname = document.forms["registration"]["lname"].value;
-// let phone = document.forms["registration"]["phone"].value;
-// let email = document.forms["registration"]["email"].value;
-// let password = document.forms["registration"]["password"].value;
-//   let inputs = [username, fname, lname, phone, email, password];
-//   for (const input of inputs) {
-//     if (input === "" || input === null) {
-//       const err = document.getElementsByClassName("error");
-//       err.innerHTML = "Field is empty";
-//       return false;
-//     }
 //   }
 // }
