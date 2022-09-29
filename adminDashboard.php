@@ -45,7 +45,57 @@ if (isset($_SESSION['user_id'])) {
     </p>
 
     <p class="text-center">You have special privileges - Proceed with caution</p>
+    <p class="text-center">Here, you can view or delete any active car listing</p>
     <hr>
+</div>
+<div> 
+    <?php
+        $view_cars = "SELECT * FROM `cars`;";
+
+        $listings = mysqli_query($con, $view_cars);
+
+        $count = mysqli_num_rows($listings);
+
+        if($count == 0) {
+            $add_car = "<p style='text-align:center;font-size:15pt;'>There are no active listings at the moment.</p>";
+            echo $add_car;
+        } else {
+        ?>
+    <table class="listings">
+        <thead>
+            <tr>
+                <th><strong>Make</strong></th>
+                <th><strong>Model</strong></th>
+                <th><strong>Year</strong></th>
+                <th><strong>Mileage</strong></th>
+                <th><strong>Color</strong></th>
+                <th><strong>Condition</strong></th>
+                <th><strong>Asking Price</strong></th>
+                <th><strong>Date Posted</strong></th>
+                <th id="empty"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+             while($rows = mysqli_fetch_assoc($listings)) {
+            ?>
+            <tr>
+                <td align="center"><?php echo $rows['make']; ?></td>
+                <td align="center"><?php echo $rows['model']; ?></td>
+                <td align="center"><?php echo $rows['year']; ?></td>
+                <td align="center"><?php echo $rows['mileage'] . " km"; ?></td>
+                <td align="center"><?php echo $rows['color']; ?></td>
+                <td align="center"><?php echo $rows['car_condition']; ?></td>
+                <td align="center"><?php echo "$".$rows['asking_price']; ?></td>
+                <td align="center"><?php echo $rows['date_posted']; ?></td>
+                <td align="center">
+                    <button id="delete-car"><a href="delete-car-admin.php?car_id=<?php echo $rows['car_id']; ?>">Delete</a></button>
+                </td>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <?php } ?>
 </div>
 
 
