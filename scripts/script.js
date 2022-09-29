@@ -1,13 +1,8 @@
 "use strict";
 
-// function validateUserRegForm() {
-//   const username = document.getElementById("username");
-
-//   const form = document.getElementById("regForm");
-// }
+//! the problem here is that it blocks the duplicate username PHP error message. Solve or remove checking username?
 
 // -----REGISTRATION.PHP VALIDATION-----
-//! the problem here is that it blocks the duplicate username PHP error message. Solve or remove?
 function validateUserRegForm() {
   //  receiving and storing the form entries
   //  NOTE: this method retrieves all entries as strings, so they are cast to type Number where applicable
@@ -61,6 +56,7 @@ function validateUserRegForm() {
 // -----ADDCAR.PHP VALIDATION-----
 
 function validateAddCarForm() {
+  // emptyChecker();
   //  NOTE: this function is called first so as to not have possible empty-value PHP error messages from being blocked by Javascript. This happens because being client-side, JS runs before server-side PHP, so for example if an input is empty, the "empty" PHP error message will be overwritten by JS regex-check error messages - the result being an empty field on submission will not show the user the correct error.
 
   //  receiving and storing the form entries
@@ -96,10 +92,6 @@ function validateAddCarForm() {
       }
     }
   });
-
-  // inputs.forEach((input) => {
-  //   emptyChecker(input);
-  // });
 
   //  preparing regexes for each form entry
   const makeRegex = /^[a-zA-Z -]*$/;
@@ -142,15 +134,16 @@ function validateAddCarForm() {
     return false;
   } else console.log("Success");
 
-  function emptyChecker(inputs) {
-    if (inputs === "" || inputs === 0) {
-      document.getElementById("makeErr").innerHTML = "&nbsp test &nbsp";
-    }
-  }
+  // function emptyChecker(inputs) {
+  //   if (inputs === "" || inputs === 0) {
+  //     document.getElementById("makeErr").innerHTML = "&nbsp test &nbsp";
+  //   }
+  // }
 } //end validateAddCarForm()
 
 //----------------------------------------------------------------------
 
+// another nope:
 // function validateUserRegForm() {
 //  checkValidity must be placed on inputs or selects
 //   const regBtn = document.getElementById("userRegSubmitBtn");
