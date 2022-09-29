@@ -8,5 +8,4 @@ $delete_cars = "DELETE FROM `cars` WHERE `user_id`='$user_id'";
 $result1 = mysqli_query($con,$delete_user) or die ( mysqli_error($con));
 $result2 = mysqli_query($con,$delete_cars) or die ( mysqli_error($con));
 
-header("Location: adminDashboard.php");
-?>
+header("Location: view-accounts.php");

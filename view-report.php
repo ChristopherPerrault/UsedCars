@@ -37,7 +37,8 @@ include('templates/header-logged-in.php');
                     <th><strong>Car ID</strong></th>
                     <th><strong>Date</strong></th>
                     <th><strong>Final Price</strong></th>
-                    <th><strong><button id="generate-report"><a href="add-report.php" > Generate New Report</a></button></strong></th>
+                    <th><strong><button id="generate-report"><a href="add-report.php"> Generate New
+                                    Report</a></button></strong></th>
                 </tr>
             </thead>
             <tbody>
