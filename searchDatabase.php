@@ -14,7 +14,7 @@ include('templates/header-logged-in.php');
     <p class="text-center">
         You can even save it to a text file!
     </p>
-    <hr>
+
     <!-- </div> -->
     <!-- <div class="container mt-5"> -->
     <form id="databaseForm" action="" method="post">

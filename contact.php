@@ -40,7 +40,6 @@ if (isset($_REQUEST['user_id'])) {
     </p>
 
     <p class="text-center">Contact them if you are interested in the car! </p>
-    <hr>
 
     <form action="" method="post" name="form">
         <label for="name">Name: </label>
