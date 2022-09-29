@@ -30,7 +30,7 @@
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
 
-                <a class="navbar-brand" href="#">Used Cars</a>
+                <a class="navbar-brand" href="index-logged-in.php" title="View All Active Listings">Used Cars</a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
@@ -62,10 +62,10 @@
                         if ($row['usertype'] == 'admin') { ?>
 
                             <li class="nav-item">
-                                <a class="nav-link">Add a Car Listing</a>
-                            </li>
+                                <a class="nav-link disabled">Add a Car Listing</a>
+                            </li>   
                             <li class="nav-item">
-                                <a class="nav-link" href="reports/home.php">Reports</a>
+                                <a class="nav-link " href="#">Reports</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Accounts</a>
