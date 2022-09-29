@@ -141,22 +141,22 @@ function validateUserRegForm() {
         switch (input) {
           case username:
             document.getElementById("usernameErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Username is required. &nbsp";
           case fname:
             document.getElementById("fnameErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp First Name is required. &nbsp";
           case lname:
             document.getElementById("lnameErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Last Name is required. &nbsp";
           case phone:
             document.getElementById("phoneErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Phone Number is Required. &nbsp";
           case email:
             document.getElementById("emailErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Email is required. &nbsp";
           case password:
             document.getElementById("passwordErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Password is required. &nbsp";
           default:
             console.log("Form isn't empty but should work");
         }
@@ -180,19 +180,19 @@ function validateUserRegForm() {
         switch (input) {
           case make:
             document.getElementById("makeErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Make is required &nbsp";
           case model:
             document.getElementById("modelErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Model is required &nbsp";
           case mileage:
             document.getElementById("mileageErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Mileage is required &nbsp";
           case color:
             document.getElementById("colorErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Color is required &nbsp";
           case asking_price:
             document.getElementById("askPriceErr").innerHTML =
-              "&nbsp Field required &nbsp";
+            "&nbsp Asking price is required &nbsp";
           default:
             console.log("Form isn't empty");
         }
