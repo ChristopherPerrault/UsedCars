@@ -25,8 +25,6 @@ include('templates/header-logged-in.php');
 
     <p class="text-center"><a href="userdashboard.php">Check your active listings here!</a></p>
     <hr>
-</div>
-<div> 
     <?php
         $user_id = $_SESSION['user_id'];
 

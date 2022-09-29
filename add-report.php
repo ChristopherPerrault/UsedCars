@@ -73,8 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     Make sure to select a User ID and a Car ID that go together!
   </p>
   <hr>
-</div>
-<div class="container mt-5">
   <form action="" method="post">
     <div class="form-group">
       <label for="userID" class="form-label">Select a User ID: </label>
@@ -109,10 +107,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       echo "$failure";
       ?>
     </div>
-
+    
     <div class="form-group">
       <input id="generate-report" type="submit" name="submit" value="Generate Report">
     </div>
+    <button id="back-b" class="mt-3 mb-3"><a  href="view-report.php"> Back </a></button>
   </form>
 </div>
 
@@ -120,7 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- a BACK button to go to the home page -->
 <div class="container text-center mt-5">
-  <button id="back-b" class="mt-3 mb-3"><a  href="view-report.php"> Back </a></button>
 </div>
 
 

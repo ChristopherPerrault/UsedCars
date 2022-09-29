@@ -47,8 +47,6 @@ if (isset($_SESSION['user_id'])) {
     <p class="text-center">You have special privileges - Proceed with caution</p>
     <p class="text-center">Here, you can view or delete any active car listing</p>
     <hr>
-</div>
-<div> 
     <?php
         $view_cars = "SELECT * FROM `cars`;";
 
