@@ -56,54 +56,61 @@ include('./../templates/header-reports.php');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $chosenUsername = $_POST['selectedUser'];
-      echo "<h5>$chosenUsername</h5><hr>";
+      echo "<h5><b>$chosenUsername</b></h5><hr>";
       $requestedData = "SELECT * FROM `users` WHERE username = '" . $chosenUsername . "'";
       $finalResult = mysqli_query($con, $requestedData);
       $chosenUser_id = "";
       while ($userInfo = mysqli_fetch_assoc($finalResult)) {
+        echo "Here are the personal details for <b>$chosenUsername</b> <br>";
         if (isset($_POST['first_name'])) {
-          echo $userInfo['first_name'];
+          echo "FIRST NAME: " . $userInfo['first_name'] . " - ";
         }
         if (isset($_POST['last_name'])) {
-          echo $userInfo['last_name'];
+          echo "LAST NAME: " . $userInfo['last_name'] . " - ";
         }
         if (isset($_POST['phone_number'])) {
-          echo $userInfo['phone_number'];
+          echo "PHONE NUMBER: " . $userInfo['phone_number'] . " - ";
         }
         if (isset($_POST['email'])) {
-          echo $userInfo['email'];
+          echo "EMAIL: " . $userInfo['email'];
         }
 
         $chosenUser_id = $userInfo['user_id'];
       }
 
-      echo "<br><br><br>";
+      echo "<br><hr>";
       $requestedData = "SELECT * FROM `cars` WHERE user_id = '" . $chosenUser_id . "'";
       $finalResult2 = mysqli_query($con, $requestedData);
-
+      $count = mysqli_num_rows($finalResult2);
+      $car_number = 1;
+      echo "There is/are $count car(s) for <b>$chosenUsername</b> <br>";
       while ($carInfo = mysqli_fetch_assoc($finalResult2)) {
+        echo "Here are the details for car $car_number: ";
         if (isset($_POST['make'])) {
-          echo $carInfo['make'];
+          echo "MAKE: " . $carInfo['make'] . " - ";
         }
         if (isset($_POST['model'])) {
-          echo $carInfo['model'];
+          echo "MODEL: " . $carInfo['model'] . " - ";
         }
         if (isset($_POST['year'])) {
-          echo $carInfo['year'];
+          echo "YEAR: " . $carInfo['year'] . " - ";
         }
         if (isset($_POST['color'])) {
-          echo $carInfo['color'];
+          echo "COLOR: " . $carInfo['color'] . " - ";
         }
         if (isset($_POST['car_condition'])) {
-          echo $carInfo['car_condition'];
+          echo "CAR CONDITON: " . $carInfo['car_condition'] . " - ";
         }
         if (isset($_POST['asking_price'])) {
-          echo $carInfo['asking_price'];
+          echo "ASKING PRICE: " . $carInfo['asking_price'] . " - ";
         }
         if (isset($_POST['date_posted'])) {
-          echo $carInfo['date_posted'];
+          echo "DATE POSTED: " . $carInfo['date_posted'];
         }
+        echo "<br>";
+        $car_number++;
       }
+      
     }
     ?>
 
