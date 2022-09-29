@@ -145,6 +145,8 @@ input:checked + .slider:before {
 /* User Dashboard Table */
 .listings {
   border: 5px solid gray;
+  margin-bottom: 45px;
+  /* padding-bottom: 16px; */
 }
 
 .listings > tbody > tr > td,
@@ -267,6 +269,7 @@ input#generate-report:active {
 }
 
 .foot {
+  background-color: rgb(233, 233, 233);
   font-family: "Courier New", Courier, monospace;
   font-size: larger;
   font-weight: bolder;

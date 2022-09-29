@@ -33,8 +33,8 @@ $accounts = mysqli_query($con, $query) or die(mysqli_error($con));
     <p class="text-center">You can view or delete any account.</p>
     <hr>
 </div>
-<div> 
-<table class="listings">
+<div>
+    <table class="listings">
         <thead>
             <tr>
                 <th><strong>User ID</strong></th>
@@ -49,20 +49,20 @@ $accounts = mysqli_query($con, $query) or die(mysqli_error($con));
         </thead>
         <tbody>
             <?php
-             while($rows = mysqli_fetch_assoc($accounts)) {
+            while ($rows = mysqli_fetch_assoc($accounts)) {
             ?>
-            <tr>
-                <td align="center"><?php echo $rows['user_id']; ?></td>
-                <td align="center"><?php echo $rows['username']; ?></td>
-                <td align="center"><?php echo $rows['first_name']; ?></td>
-                <td align="center"><?php echo $rows['last_name']; ?></td>
-                <td align="center"><?php echo $rows['phone_number']; ?></td>
-                <td align="center"><?php echo $rows['email']; ?></td>
-                <td align="center"><?php echo $rows['usertype']; ?></td>
-                <td align="center">
-                    <button id="delete-car"><a href="delete-user.php?user_id=<?php echo $rows['user_id']; ?>">Delete</a></button>
-                </td>
-            </tr>
+                <tr>
+                    <td align="center"><?php echo $rows['user_id']; ?></td>
+                    <td align="center"><?php echo $rows['username']; ?></td>
+                    <td align="center"><?php echo $rows['first_name']; ?></td>
+                    <td align="center"><?php echo $rows['last_name']; ?></td>
+                    <td align="center"><?php echo $rows['phone_number']; ?></td>
+                    <td align="center"><?php echo $rows['email']; ?></td>
+                    <td align="center"><?php echo $rows['usertype']; ?></td>
+                    <td align="center">
+                        <button id="delete-car"><a href="delete-user.php?user_id=<?php echo $rows['user_id']; ?>">Delete</a></button>
+                    </td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>

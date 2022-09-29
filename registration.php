@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fname = test_input($_POST['fname']);
         //  regex: min 2 chars, max 50 as per db constraint, only letters allowed
         if (!preg_match("/^[a-zA-Z]{2,50}$/", $fname)) {
-            $fnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed. &nbsp";
+            $fnameErr = "&nbsp Only letters, minimum 2 characters, maxiumum 50 allowed.&nbsp";
         }
     }
 
@@ -157,10 +157,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h1>Registration</h1>
     <br>
     <!-- Form -->
-    <form name="registration" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" onsubmit="return validateUserRegForm()">
+    <form name="registration" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST"
+        onsubmit="return validateUserRegForm()">
         <!-- User Inputs -->
         <label for="username">Username: </label>
-        <input id="username" type="text" name="username" placeholder="Ex: Skipper33" value="<?= (isset($username)) ? $username : ''; ?>" />
+        <input id="username" type="text" name="username" placeholder="Ex: Skipper33"
+            value="<?= (isset($username)) ? $username : ''; ?>" />
         <span id="usernameErr" class="error"><?php echo $usernameErr ?></span>
         <br>
         <label for="fname">First Name: </label>
@@ -176,7 +178,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span id="phoneErr" class="error"><?php echo $phoneErr ?></span>
         <br>
         <label for="email">Email: </label>
-        <input type="text" name="email" placeholder="Ex: jkimble@website.ca" value="<?= (isset($email)) ? $email : ''; ?>" />
+        <input type="text" name="email" placeholder="Ex: jkimble@website.ca"
+            value="<?= (isset($email)) ? $email : ''; ?>" />
         <span id="emailErr" class="error"><?php echo $emailErr ?></span>
         <br>
         <label for="password">Password: </label>
