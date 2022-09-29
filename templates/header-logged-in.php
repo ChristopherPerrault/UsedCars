@@ -64,7 +64,7 @@
                                 <a class="nav-link" href="searchDatabase.php">Search Database</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#">Reports</a>
+                                <a class="nav-link " href="reports/home.php">Reports</a>
                             </li>
 
                         <?php } else { ?>
