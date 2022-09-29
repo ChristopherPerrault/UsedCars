@@ -24,22 +24,22 @@ include('templates/header-logged-out.php');
 
     <p class="text-center"><a href="registration.php">Join us to add your own listings or purchase active ones!</a></p>
     <hr>
-</div>
-<div> 
+
+
     <?php
-        $no_cars = "";
+    $no_cars = "";
 
-        $view_cars = "SELECT * FROM `cars`;";
+    $view_cars = "SELECT * FROM `cars`;";
 
-        $listings = mysqli_query($con, $view_cars);
+    $listings = mysqli_query($con, $view_cars);
 
-        $count = mysqli_num_rows($listings);
+    $count = mysqli_num_rows($listings);
 
-        if($count == 0) {
-            $no_cars = "<p style='text-align:center;font-size:15pt;'> It looks like we do not have any active listings at the moment. Join us to add your own!</p>";
-            echo $no_cars;
-        } else {
-        ?>
+    if ($count == 0) {
+        $no_cars = "<p style='text-align:center;font-size:15pt;'> It looks like we do not have any active listings at the moment. Join us to add your own!</p>";
+        echo $no_cars;
+    } else {
+    ?>
     <table class="listings">
         <thead>
             <tr>
@@ -55,8 +55,8 @@ include('templates/header-logged-out.php');
         </thead>
         <tbody>
             <?php
-             while($rows = mysqli_fetch_assoc($listings)) {
-            ?>
+                while ($rows = mysqli_fetch_assoc($listings)) {
+                ?>
             <tr>
                 <td align="center"><?php echo $rows['make']; ?></td>
                 <td align="center"><?php echo $rows['model']; ?></td>
@@ -64,7 +64,7 @@ include('templates/header-logged-out.php');
                 <td align="center"><?php echo $rows['mileage'] . " km"; ?></td>
                 <td align="center"><?php echo $rows['color']; ?></td>
                 <td align="center"><?php echo $rows['car_condition']; ?></td>
-                <td align="center"><?php echo "$".$rows['asking_price']; ?></td>
+                <td align="center"><?php echo "$" . $rows['asking_price']; ?></td>
                 <td align="center"><?php echo $rows['date_posted']; ?></td>
             </tr>
             <?php } ?>

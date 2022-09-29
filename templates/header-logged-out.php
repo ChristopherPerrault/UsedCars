@@ -20,7 +20,8 @@
         <link rel="icon" href="assets/img/favicon.png">
 
         <!-- Link to JS Bootstrap CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous">
+        </script>
 </head>
 
 <!-- Universal header -->
@@ -45,7 +46,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="login.php">Log In</a>
                         </li>
-                        
+
                     </ul>
 
                 </div>
@@ -53,4 +54,5 @@
         </nav>
     </header>
 </body>
+
 </html>
