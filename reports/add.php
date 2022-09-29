@@ -43,14 +43,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = date("Y.m.d");
     $finalPrice = $_POST["final_price"];
 
-    $addQuery = "INSERT INTO `reports`(user_id, car_id, `date`, final_price) VALUES ('" . $userID . "', '" . $carID . "', '" . $date . "', '" . $finalPrice . "')";
+    $validateQuery = "SELECT * FROM `cars` WHERE car_id = '" . $carID . "' and user_id = '" . $userID . "'";
+    $check = mysqli_query($con, $validateQuery);
+    $num_rows = mysqli_num_rows($check);
 
-    $flag = mysqli_query($con, $addQuery);
+    if ($num_rows == 1) {
+      $addQuery = "INSERT INTO `reports`(user_id, car_id, `date`, final_price) VALUES ('" . $userID . "', '" . $carID . "', '" . $date . "', '" . $finalPrice . "')";
+      $flag = mysqli_query($con, $addQuery);
 
-    if ($flag) {
-      $success = '<span class="success">Contract has been successfully added</span>';
+      if ($flag) {
+        $success = '<span class="success">Contract has been successfully added</span>';
+      } else {
+        die("Cannot add contract" . mysqli_error($con));
+      }
     } else {
-      die("Cannot add contract" . mysqli_error($con));
+      $failure = "Those User and Car IDs do not match!";
     }
   } else {
     $failure = "Error somewhere";
@@ -58,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<h1 class="text-center">Search Database</h1>
+<h1 class="text-center">Create Official Contract for Sold Car</h1>
 <div class="container">
   <form action="" method="post">
     <div class="form-group">
