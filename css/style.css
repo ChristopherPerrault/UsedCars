@@ -315,3 +315,24 @@ button#back-b a:hover {
 button#back-b a:active {
   box-shadow: none;
 }
+
+button#exportCSV {
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+  background-color: #e4d66a;
+  box-shadow: 2px 2px gray;
+}
+
+button#exportCSV a {
+  color: black;
+  padding: 5px;
+}
+
+button#exportCSV a:hover {
+  color: white;
+}
+
+button#exportCSV a:active {
+  box-shadow: none;
+}

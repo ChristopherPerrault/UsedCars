@@ -8,9 +8,9 @@ include('templates/header-logged-in.php');
 
 
 <div class="container">
-    <h1 class="text-center">Current Reports</h1><br>
+    <h1 class="text-center">Current Report</h1><br>
     <p class="text-center">
-        Build Reports and Export them to your local computer!
+        Customize this Report and Export it to your computer!
     </p>
     <?php
     $add_report = "";
@@ -40,8 +40,7 @@ include('templates/header-logged-in.php');
                     <th><strong>Date of Sale</strong></th>
                     <th><strong>Final Price</strong></th>
                     <th><strong>Status</strong></th>
-                    <th><strong><button id="generate-report"><a href="add-report.php"> Generate New
-                                    Report</a></button></strong></th>
+                    <th><strong><button id="generate-report"><a href="add-report.php"> Add new Contract</a></button></strong></th>
                 </tr>
             </thead>
             <tbody>
@@ -74,6 +73,8 @@ include('templates/header-logged-in.php');
             </tbody>
         <?php } ?>
         </table>
+        <button id="exportCSV"><a href="dump.php" target="_blank">Export as CSV</a></button>
+
 </div>
 
 <!-- Footer -->
