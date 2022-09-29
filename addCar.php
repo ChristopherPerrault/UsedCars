@@ -163,78 +163,79 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>UsedCars | Add Car</title>
 </head>
 
-<body>
-    <div class="container">
-        <form name="addCar" onsubmit="return validateAddCarForm()"
-            action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+<div class="container">
+    <h1 class="text-center"> Add Car Listing</h1>
 
-            <label for="make">Car Make: </label>
-            <input type="text" name="make" placeholder="Ex: Honda" value="<?= (isset($make)) ? $make : ''; ?>"><br>
-            <span id="makeErr" class="error"><?= $makeErr ?></span>
+    <p class="text-center">
+        Add a new car for sale to your account.
+    </p>
+    <hr>
+    <form name="addCar" onsubmit="return validateAddCarForm()"
+        action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 
-
-            <label for="model">Car Model: </label>
-            <input type="text" name="model" placeholder="Ex: Accord"
-                value="<?= (isset($model)) ? $model : ''; ?>"><br><span id="modelErr"
-                class="error"><?= $modelErr ?></span>
-
-
-            <label for="year">Year: </label>
-            <input type="text" name="year" placeholder="Ex: 1998" value="<?= (isset($year)) ? $year : ''; ?>"><br>
-            <span id="yearErr" class="error"><?= $yearErr ?></span>
+        <label for="make">Car Make: </label>
+        <input type="text" name="make" placeholder="Ex: Honda" value="<?= (isset($make)) ? $make : ''; ?>"><br>
+        <span id="makeErr" class="error"><?= $makeErr ?></span>
 
 
-            <label for="mileage">Mileage: </label>
-            <input type="text" name="mileage" placeholder="Ex: 210000"
-                value="<?= (isset($mileage)) ? $mileage : ''; ?>">
-
-            <!-- Mileage selector toggle: km/mi, km by default -->
-            <label class="switch">
-                <input type="checkbox" name="mileageSelect">
-                <span class="slider round"></span>
-            </label>
-
-            <br><span id="mileageErr" class="error"><?= $mileageErr ?></span>
+        <label for="model">Car Model: </label>
+        <input type="text" name="model" placeholder="Ex: Accord" value="<?= (isset($model)) ? $model : ''; ?>"><br><span
+            id="modelErr" class="error"><?= $modelErr ?></span>
 
 
-            <label for="color">Color: </label>
-            <input type="text" name="color" placeholder="Ex: Blue" value="<?= (isset($color)) ? $color : ''; ?>"><br>
-            <span id="colorErr" class="error"><?= $colorErr ?></span>
+        <label for="year">Year: </label>
+        <input type="text" name="year" placeholder="Ex: 1998" value="<?= (isset($year)) ? $year : ''; ?>"><br>
+        <span id="yearErr" class="error"><?= $yearErr ?></span>
 
 
-            <label for="car_condition">Condition:</label>
-            <select name="car_condition" value="<?= (isset($carCondition)) ? $carCondition : ''; ?>">
-                <optgroup label="--Select Condition--">
-                    <option value="Like New">Like New</option>
-                    <option value="Very Good">Very Good</option>
-                    <option value="Good">Good</option>
-                    <option value="Fair">Fair</option>
-                    <option value="Poor">Poor</option>
-                    <option value="Very Poor">Very Poor</option>
-                </optgroup>
-            </select>
-            <!-- error technically not needed: -->
-            <span id="carConditionErr" class="error"><?= $carConditionErr ?></span>
-            <br>
+        <label for="mileage">Mileage: </label>
+        <input type="text" name="mileage" placeholder="Ex: 210000" value="<?= (isset($mileage)) ? $mileage : ''; ?>">
 
-            <label for="asking_price">Asking Price: </label>
-            <input type="text" name="asking_price" placeholder="Ex: 2400"
-                value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
-            <span id="askPriceErr" class="error"><?= $askPriceErr ?></span>
+        <!-- Mileage selector toggle: km/mi, km by default -->
+        <label class="switch">
+            <input type="checkbox" name="mileageSelect">
+            <span class="slider round"></span>
+        </label>
 
-            <br>
-            <!-- bottom-of-form buttons -->
-            <input type="submit" value="Confirm" class="bottom-btn confirm"><br>
+        <br><span id="mileageErr" class="error"><?= $mileageErr ?></span>
 
-            <a href="userdashboard.php"><input type="button" value="Go Back" class="bottom-btn back"></a>
 
-        </form>
-        <?php echo "<span><strong>$message</strong></span>"; ?>
+        <label for="color">Color: </label>
+        <input type="text" name="color" placeholder="Ex: Blue" value="<?= (isset($color)) ? $color : ''; ?>"><br>
+        <span id="colorErr" class="error"><?= $colorErr ?></span>
 
-    </div>
-</body>
+
+        <label for="car_condition">Condition:</label>
+        <select name="car_condition" value="<?= (isset($carCondition)) ? $carCondition : ''; ?>">
+            <optgroup label="--Select Condition--">
+                <option value="Like New">Like New</option>
+                <option value="Very Good">Very Good</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+                <option value="Very Poor">Very Poor</option>
+            </optgroup>
+        </select>
+        <!-- error technically not needed: -->
+        <span id="carConditionErr" class="error"><?= $carConditionErr ?></span>
+        <br>
+
+        <label for="asking_price">Asking Price: </label>
+        <input type="text" name="asking_price" placeholder="Ex: 2400"
+            value="<?= (isset($askPrice)) ? $askPrice : ''; ?>" min="1" max="9999999"><br>
+        <span id="askPriceErr" class="error"><?= $askPriceErr ?></span>
+
+        <br>
+        <!-- bottom-of-form buttons -->
+        <input type="submit" value="Add Car" class="bottom-btn confirm"><br>
+
+        <a href="userdashboard.php"><input type="button" value="Go Back" class="bottom-btn back"></a>
+
+    </form>
+    <?php echo "<span><strong>$message</strong></span>"; ?>
+
+</div>
+
 <?php
 include('./templates/footer.php');
 ?>
-
-</html>

@@ -27,7 +27,9 @@
 }
 
 .container {
-  background-color: #b4eafd;
+  background-image: url("../assets/img/carsbackground.jpg");
+  background-size: cover;
+  /* opacity: 0.2; */
 }
 
 /* ---FORMS--- */
@@ -37,11 +39,20 @@
   flex-flow: column wrap;
   justify-content: space-evenly;
   align-items: center;
-  max-width: 300;
-  min-width: 200;
+  max-width: 300px;
+  min-width: 300px;
   border: 4px solid black;
-  background-color: rgb(215, 215, 215);
+  border-radius: 2%;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(221, 255, 249),
+    rgb(39, 136, 116)
+  );
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.bottom-btn {
+  border: #000000 1px solid;
+  margin-bottom: 10px;
 }
 
 /*  The switch - the box around the slider  */
@@ -51,6 +62,8 @@
   width: 60px;
   height: 32px;
   font-style: italic;
+  border: #000000 solid 2px;
+  border-radius: 12px;
 }
 
 /* Hide default HTML checkbox */
@@ -64,30 +77,32 @@
 /* The slider */
 .slider {
   position: absolute;
+  padding-top: 22px;
   cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgb(170, 189, 248);
+  background-color: rgb(104, 139, 243);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 .slider:before {
   position: absolute;
+  padding-top: 25px;
   content: "km";
-  height: 26px;
-  width: 28px;
+  height: 23px;
+  width: 22px;
   left: 4px;
-  bottom: 4px;
-  background-color: rgb(225, 228, 228);
+  bottom: 2px;
+  background-color: rgb(54, 54, 54);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #c3d032;
+  background-color: #d6c937;
 }
 
 input:focus + .slider {
@@ -103,19 +118,20 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 10px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+  border-radius: 10px;
 }
 
 /* User Dashboard Table */
 .listings {
-  border: 5px solid gray
+  border: 5px solid gray;
 }
 
-.listings > tbody > tr > td, .listings > thead > tr > th {
+.listings > tbody > tr > td,
+.listings > thead > tr > th {
   border-right: 2px solid gray;
   border-bottom: 2px solid gray;
   padding: 5px 10px 5px 10px;
@@ -184,7 +200,7 @@ button#contact a:hover {
   color: white;
 }
 
-button#edit-report{
+button#edit-report {
   border-radius: 10px;
   padding: 5px;
   margin: 5px;
@@ -226,3 +242,18 @@ button#delete-report a:active {
   box-shadow: none;
 }
 
+.foot {
+  font-family: "Courier New", Courier, monospace;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.notreg {
+  border: #000000 1.5px solid;
+  padding: 2px 2px;
+  margin-bottom: 3px;
+  width: fit-content;
+  background-color: aliceblue;
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px whitesmoke;
+}

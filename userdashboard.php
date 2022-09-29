@@ -37,31 +37,31 @@ if (isset($_SESSION['user_id'])) {
 <!-- Body -->
 <div class="container mt-5">
     <!-- Echo User First Name -->
-    <h1 class="text-center"> Welcome <?php echo $first_name ?>!</h1>
+    <h1 class="text-center"> Welcome, <?php echo $first_name ?>!</h1>
 
     <p class="text-center">
-        This is your home page -- You can chillout here
+        This is your home page.
     </p>
 
-    <p class="text-center">Check out all of your listings below!</p>
+    <p class="text-center">Check out all of your listings below:</p>
     <hr>
 </div>
-<div> 
+<div>
     <?php
-        $add_car = "";
+    $add_car = "";
 
-        $user_id = $_SESSION['user_id'];
-        $view_cars = "SELECT * FROM `cars` WHERE `user_id`='$user_id'";
+    $user_id = $_SESSION['user_id'];
+    $view_cars = "SELECT * FROM `cars` WHERE `user_id`='$user_id'";
 
-        $listings = mysqli_query($con, $view_cars);
+    $listings = mysqli_query($con, $view_cars);
 
-        $count = mysqli_num_rows($listings);
+    $count = mysqli_num_rows($listings);
 
-        if($count == 0) {
-            $add_car = "<p style='text-align:center;font-size:15pt;'> It looks like you do not have any active listings.<a href='addCar.php'> Add a car listing here!</a></p>";
-            echo $add_car;
-        } else {
-        ?>
+    if ($count == 0) {
+        $add_car = "<p style='text-align:center;font-size:15pt;'> It looks like you do not have any active listings. <a href='addCar.php'>Add a car listing here!</a></p>";
+        echo $add_car;
+    } else {
+    ?>
     <table class="listings">
         <thead>
             <tr>
@@ -78,8 +78,8 @@ if (isset($_SESSION['user_id'])) {
         </thead>
         <tbody>
             <?php
-             while($rows = mysqli_fetch_assoc($listings)) {
-            ?>
+                while ($rows = mysqli_fetch_assoc($listings)) {
+                ?>
             <tr>
                 <td align="center"><?php echo $rows['make']; ?></td>
                 <td align="center"><?php echo $rows['model']; ?></td>
@@ -87,11 +87,12 @@ if (isset($_SESSION['user_id'])) {
                 <td align="center"><?php echo $rows['mileage'] . " km"; ?></td>
                 <td align="center"><?php echo $rows['color']; ?></td>
                 <td align="center"><?php echo $rows['car_condition']; ?></td>
-                <td align="center"><?php echo "$".$rows['asking_price']; ?></td>
+                <td align="center"><?php echo "$" . $rows['asking_price']; ?></td>
                 <td align="center"><?php echo $rows['date_posted']; ?></td>
                 <td align="center">
                     <button id="edit-car"><a href="edit-car.php?car_id=<?php echo $rows['car_id']; ?>">Edit</a></button>
-                    <button id="delete-car"><a href="delete-car.php?car_id=<?php echo $rows['car_id']; ?>">Delete</a></button>
+                    <button id="delete-car"><a
+                            href="delete-car.php?car_id=<?php echo $rows['car_id']; ?>">Delete</a></button>
                 </td>
             </tr>
             <?php } ?>

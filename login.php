@@ -14,7 +14,7 @@ function test_input($data)
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
-    return $data; 
+    return $data;
 }
 
 // check if form submitted
@@ -36,17 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = mysqli_fetch_assoc($result);
 
         if ($row['usertype'] == "admin") {
-            //! define the $_SESSION['user_id']
+            // define the $_SESSION['user_id']
             $_SESSION['user_id'] = $row['user_id'];
             header("Location: adminDashboard.php");
-
         } else if ($row['usertype'] == "user") {
-            //! define the $_SESSION['user_id']
             $_SESSION['user_id'] = $row['user_id'];
             header('Location: userdashboard.php');
         }
     }
-    
 }
 
 ?>
@@ -73,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input name="submit" type="submit" value="Login" />
     </form>
     <br>
-    <p>Not registered yet? <a href='registration.php'>Register Here</a></p>
+    <p class="notreg">&nbsp Not registered yet? <a href='registration.php'>Register Here</a> &nbsp</p>
 </div>
 
 <!-- Footer -->

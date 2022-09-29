@@ -2,7 +2,7 @@
 
 <footer class="footer mt-5">
 
-    <div class="container text-center">
+    <div class="text-center foot">
         <div>© 2022 REGEX GROUP</div>
     </div>
 
