@@ -7,14 +7,14 @@ include('templates/header-logged-in.php');
 
 
 <div class="container mt-5">
-<h1 class="text-center">Search Database</h1><br>
-    <p class="text-center">
-        Choose the information you want to fetch from the database!
-    </p>
-    <p class="text-center">
-        You can even save it to a text file!
-    </p>
-    <hr>
+  <h1 class="text-center">Search Database</h1><br>
+  <p class="text-center">
+    Choose the information you want to fetch from the database!
+  </p>
+  <p class="text-center">
+    You can even save it to a text file!
+  </p>
+  <hr>
 </div>
 <div class="container mt-5">
   <form action="" method="post">
@@ -25,8 +25,6 @@ include('templates/header-logged-in.php');
         $user_id = $_SESSION['user_id'];
         $view_usernames = "SELECT * FROM `users`";
         $allUsers = mysqli_query($con, $view_usernames);
-        #$count = mysqli_num_rows($allUsers);
-
 
         while ($rows = mysqli_fetch_assoc($allUsers)) {
         ?>
@@ -66,67 +64,109 @@ include('templates/header-logged-in.php');
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $chosenUsername = $_POST['selectedUser'];
-      echo "<h5><b>$chosenUsername</b></h5><hr>";
       $requestedData = "SELECT * FROM `users` WHERE username = '" . $chosenUsername . "'";
       $finalResult = mysqli_query($con, $requestedData);
-      $chosenUser_id = "";
+      $chosenUser_id = $no_car = "";
+
       while ($userInfo = mysqli_fetch_assoc($finalResult)) {
-        echo "Here are the personal details for <b>$chosenUsername</b> <br>";
-        if (isset($_POST['first_name'])) {
-          echo "FIRST NAME: " . $userInfo['first_name'] . " - ";
-        }
-        if (isset($_POST['last_name'])) {
-          echo "LAST NAME: " . $userInfo['last_name'] . " - ";
-        }
-        if (isset($_POST['phone_number'])) {
-          echo "PHONE NUMBER: " . $userInfo['phone_number'] . " - ";
-        }
-        if (isset($_POST['email'])) {
-          echo "EMAIL: " . $userInfo['email'];
-        }
-
         $chosenUser_id = $userInfo['user_id'];
+        if (isset($_POST['first_name']) || isset($_POST['last_name']) || isset($_POST['phone_number']) || isset($_POST['email'])) {
+    ?>
+          <h5><?php echo "Here are the personal details for $chosenUsername" ?></h5>
+          <table class="listings">
+            <thead>
+              <tr>
+                <th><strong>First Name</strong></th>
+                <th><strong>Last Name</strong></th>
+                <th><strong>Phone Number</strong></th>
+                <th><strong>Email</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="center"><?php if (isset($_POST['first_name'])) {
+                                      echo $userInfo['first_name'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['last_name'])) {
+                                      echo $userInfo['last_name'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['phone_number'])) {
+                                      echo $userInfo['phone_number'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['email'])) {
+                                      echo $userInfo['email'];
+                                    } ?></td>
+              </tr>
+            </tbody>
+          </table>
+        <?php
+        } else {
+        ?>
+          <b><i>You didn't select any user information to display!</p> </i></b>
+          <p>
+          <?php
+        }
       }
-
-      echo "<br><hr>";
       $requestedData = "SELECT * FROM `cars` WHERE user_id = '" . $chosenUser_id . "'";
       $finalResult2 = mysqli_query($con, $requestedData);
-      $count = mysqli_num_rows($finalResult2);
+      
       $car_number = 1;
-      echo "There is/are $count car(s) for <b>$chosenUsername</b> <br>";
       while ($carInfo = mysqli_fetch_assoc($finalResult2)) {
-        echo "Here are the details for car $car_number: ";
-        if (isset($_POST['make'])) {
-          echo "MAKE: " . $carInfo['make'] . " - ";
+        if (isset($_POST['make']) || isset($_POST['model']) || isset($_POST['year']) || isset($_POST['color']) || isset($_POST['car_condition']) || isset($_POST['asking_price']) || isset($_POST['date_posted'])) {
+          ?>
+          <h5><?php echo "Here are the details for car $car_number:" ?></h5>
+          <table class="listings">
+            <thead>
+              <tr>
+                <th><strong>Make</strong></th>
+                <th><strong>Model</strong></th>
+                <th><strong>Year</strong></th>
+                <th><strong>Color</strong></th>
+                <th><strong>Car Condition</strong></th>
+                <th><strong>Asking Price</strong></th>
+                <th><strong>Date Posted</strong></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="center"><?php if (isset($_POST['make'])) {
+                                      echo $carInfo['make'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['model'])) {
+                                      echo $carInfo['model'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['year'])) {
+                                      echo $carInfo['year'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['color'])) {
+                                      echo $carInfo['color'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['car_condition'])) {
+                                      echo $carInfo['car_condition'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['asking_price'])) {
+                                      echo $carInfo['asking_price'];
+                                    } ?></td>
+                <td align="center"><?php if (isset($_POST['date_posted'])) {
+                                      echo $carInfo['date_posted'];
+                                    } ?></td>
+              </tr>
+            </tbody>
+          </table>
+        <?php
+        } else {
+          $no_car = "<b><i>You didn't select any car information to display!</i></b>";
         }
-        if (isset($_POST['model'])) {
-          echo "MODEL: " . $carInfo['model'] . " - ";
-        }
-        if (isset($_POST['year'])) {
-          echo "YEAR: " . $carInfo['year'] . " - ";
-        }
-        if (isset($_POST['color'])) {
-          echo "COLOR: " . $carInfo['color'] . " - ";
-        }
-        if (isset($_POST['car_condition'])) {
-          echo "CAR CONDITON: " . $carInfo['car_condition'] . " - ";
-        }
-        if (isset($_POST['asking_price'])) {
-          echo "ASKING PRICE: " . $carInfo['asking_price'] . " - ";
-        }
-        if (isset($_POST['date_posted'])) {
-          echo "DATE POSTED: " . $carInfo['date_posted'];
-        }
-        echo "<br>";
+
         $car_number++;
       }
-      
+      echo $no_car;
     }
-    ?>
+      ?>
 
-    <div class="form-group">
-      <input id="generate-report" type="submit" name="submit" value="View Info">
-    </div>
+          <div class="form-group">
+            <input id="generate-report" type="submit" name="submit" value="View Info">
+          </div>
   </form>
 </div>
 
