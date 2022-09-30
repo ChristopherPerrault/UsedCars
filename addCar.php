@@ -230,7 +230,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="userdashboard.php"><input type="button" value="Go Back" class="bottom-btn back"></a>
 
     </form>
-    <?php echo "<span><strong>$message</strong></span>"; ?>
+    <p class='addcarMsg'><?php echo $message; ?></p>
 
 </div>
 

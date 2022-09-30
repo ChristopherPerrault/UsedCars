@@ -306,6 +306,16 @@ input#generate-report:active {
   text-shadow: 1px 1px whitesmoke;
 }
 
+.addcarMsg {
+  border: #000000 1.5px solid;
+  padding: 2px 2px;
+  margin-bottom: 3px;
+  width: fit-content;
+  background-color: aliceblue;
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px whitesmoke;
+}
+
 button#back-b {
   border-radius: 10px;
   padding: 5px;
