@@ -179,7 +179,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <br>
         <input id="userRegSubmitBtn" type="submit" name="submit" value="Register" />
     </form>
-    <p><?php echo $message ?></p>
+    <p class="registermessage"><?php echo $message ?></p>
 
 </div>
 
