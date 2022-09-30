@@ -60,7 +60,7 @@ if (isset($_SESSION['user_id'])) {
         $result2 = mysqli_query($con, $update);
 
         if ($result2) {
-            $status = "<p style='font-size:15pt; text-align:center;'>You have successfully updated your account. <a href='adminDashboard.php'>Return to Dashboard here!</a></p>";
+            $status = "<p style='font-size:15pt; text-align:center;'>You have successfully updated your account. <a href='userdashboard.php'>Return to Dashboard here!</a></p>";
             echo $status;
         } else {
             $status = "<p style='font-size:15pt text-align:center;'>Update unsuccessful.<a href='my-account.php'> Try again here.</a></p>";
