@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </div>
 
       <div class="form-group">
-        <input id="generate-report" type="submit" name="submit" value="Generate Report">
+        <input id="generate-report" type="submit" name="submit" value="Add Contract to Report">
       </div>
       <button id="back-b" class="mt-3 mb-3"><a href="view-report.php"> Back </a></button>
     </form>
