@@ -1,6 +1,5 @@
 <?php
 require_once('./config/db.php');
-// include('./config/uploadImage.php');
 include('./config/auth.php');
 include('./templates/header-logged-in.php');
 

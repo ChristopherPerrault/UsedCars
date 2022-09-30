@@ -120,17 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $password = $_POST['password'];
 
-        //!hack for testing purposes, should be removed before presentation------
-        if ($username == "admin") {
-            $usertype = "admin";
-        } else {
-            $usertype = "user";
-        }
-        //!---------------------------------------------------------------------
-
-        $query = "INSERT into `users` (username, first_name, last_name, phone_number, email, `password`, usertype) VALUES ('" .
-            $username . "', '" . $fname . "', '" . $lname . "', '" . $phone . "', '" . $email . "', '" . md5($password) . "', '" .
-            $usertype . "')";
+        $query = "INSERT into `users` (username, first_name, last_name, phone_number, email, `password`) VALUES ('" .
+            $username . "', '" . $fname . "', '" . $lname . "', '" . $phone . "', '" . $email . "', '" . md5($password) . "')";
 
         $result = mysqli_query($con, $query);
 
