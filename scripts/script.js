@@ -3,7 +3,7 @@
 
 // -----REGISTRATION.PHP VALIDATION-----
 function validateUserRegForm() {
-  emptyCheckerUserReg(inputs);
+  emptyCheckerUserReg();
   //  NOTE: this function is called first so as to not have possible empty-value PHP error messages from being blocked by Javascript. This happens because being client-side, JS runs before server-side PHP, so for example if an input is empty, the "empty" PHP error message will be overwritten by JS regex-check error messages - the result being an empty field on submission will not show the user the correct error.
 
   //  receiving and storing the form entries
@@ -53,7 +53,6 @@ function validateUserRegForm() {
   } else {
     console.log("Success");
   }
-  // }
 } // end validateUserRegForm()
 
 // -----ADDCAR.PHP VALIDATION-----
