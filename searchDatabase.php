@@ -11,12 +11,6 @@ include('templates/header-logged-in.php');
     <p class="text-center">
         Choose the information you want to fetch from the database!
     </p>
-    <p class="text-center">
-        You can even save it to a text file!
-    </p>
-
-    <!-- </div> -->
-    <!-- <div class="container mt-5"> -->
     <form id="databaseForm" action="" method="post">
         <div class="form-group">
             <label for="selectedUser" class="form-label">Select a User: </label>

@@ -58,10 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Cannot add contract" . mysqli_error($con));
       }
     } else {
-      $failure = "Those User and Car IDs do not match!";
+      $failure = '<span class="error">Those User and Car IDs do not match!</span>';
     }
   } else {
-    $failure = "Error somewhere";
+    $failure = '<span class="error">Form Incomplete</span>';
   }
 }
 ?>
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="container mt-5">
     <form id="databaseForm" action="" method="post">
       <div class="form-group">
-        <h3>User ID and Car ID [INFO-TABLE]</h3>
+        <h3 class="text-center">Info Table</h3>
         <table class="listings">
           <thead>
             <tr>
@@ -131,9 +131,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <?php }
           ?>
         </select>
+        <br><br>
         <label for="final_price">Final Price</label>
         <input type="number" name="final_price">
-        <?php echo $finalPriceErr; ?>
+        <span class="error"><?php echo $finalPriceErr; ?></span>
 
         <?php
         echo "<br><br>";
