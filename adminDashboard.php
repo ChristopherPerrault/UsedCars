@@ -8,7 +8,7 @@ include('templates/header-logged-in.php');
 
 <?php
 // check if user_id is set and store in variable
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']) && $_SESSION['usertype'] == "admin") {
 
     $user_id = $_SESSION['user_id'];
 
@@ -22,8 +22,6 @@ if (isset($_SESSION['user_id'])) {
     while ($row = mysqli_fetch_assoc($result)) {
         $first_name = $row['first_name'];
     }
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,6 +92,10 @@ if (isset($_SESSION['user_id'])) {
     </table>
     <?php } ?>
 </div>
+<?php } else {
+    echo "<p align='center' style='font-size:20pt;'>WARNING you do not have access to the page!</p>
+    <p align='center' style='font-size:20pt;'><a href='userdashboard.php'>Please return to your dashboard!</a></p>";
+} ?>
 
 
 

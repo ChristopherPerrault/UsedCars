@@ -38,9 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($row['usertype'] == "admin") {
             // define the $_SESSION['user_id']
             $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['usertype'] = $row['usertype'];
             header("Location: adminDashboard.php");
         } else if ($row['usertype'] == "user") {
             $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['usertype'] = $row['usertype'];
             header('Location: userdashboard.php');
         }
     }

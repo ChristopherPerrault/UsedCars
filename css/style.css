@@ -146,7 +146,7 @@ input:checked + .slider:before {
 /* User Dashboard Table */
 .listings {
   border: 5px solid gray;
-  margin-bottom: 45px;
+  margin-bottom: 55px;
   background-color: rgb(253, 251, 247);
 }
 
