@@ -73,7 +73,7 @@ include('templates/header-logged-in.php');
             </tbody>
         <?php } ?>
         </table>
-        <button id="exportCSV"><a href="dump.php" target="_blank">Export as CSV</a></button>
+        <button id="exportCSV"><a href="export-csv.php" target="_blank">Export as CSV</a></button>
 
 </div>
 
